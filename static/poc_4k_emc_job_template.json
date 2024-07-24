@@ -1,7 +1,7 @@
 {
   "Queue": "arn:aws:mediaconvert:us-east-1:676581116332:queues/Accelerated",
   "UserMetadata": {},
-  "Role": "arn:aws:iam::676581116332:role/MediaConvert_Default_Role",
+  "Role": "arn:aws:iam::676581116332:role/service-role/MediaConvert_Default_Role",
   "Settings": {
     "TimecodeConfig": {
       "Source": "ZEROBASED"
@@ -44,8 +44,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 40000000,
-                  "Bitrate": 20000000
+                  "MaxBitrate": 20000000,
+                  "Bitrate": 10000000
                 }
               },
               "AfdSignaling": "NONE",
@@ -88,8 +88,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 14000000,
-                  "Bitrate": 12000000
+                  "MaxBitrate": 7000000,
+                  "Bitrate": 6000000
                 }
               },
               "AfdSignaling": "NONE",
@@ -132,8 +132,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 10000000,
-                  "Bitrate": 8000000
+                  "MaxBitrate": 5000000,
+                  "Bitrate": 4000000
                 }
               },
               "AfdSignaling": "NONE",
@@ -176,8 +176,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 7000000,
-                  "Bitrate": 5000000
+                  "MaxBitrate": 3500000,
+                  "Bitrate": 2500000
                 }
               },
               "AfdSignaling": "NONE",
@@ -220,8 +220,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 4500000,
-                  "Bitrate": 2500000
+                  "MaxBitrate": 2250000,
+                  "Bitrate": 1250000
                 }
               },
               "AfdSignaling": "NONE",
@@ -264,8 +264,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 2400000,
-                  "Bitrate": 1600000
+                  "MaxBitrate": 1200000,
+                  "Bitrate": 800000
                 }
               },
               "AfdSignaling": "NONE",
@@ -308,8 +308,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 1100000,
-                  "Bitrate": 900000
+                  "MaxBitrate": 550000,
+                  "Bitrate": 450000
                 }
               },
               "AfdSignaling": "NONE",
@@ -352,8 +352,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 800000,
-                  "Bitrate": 600000
+                  "MaxBitrate": 400000,
+                  "Bitrate": 300000
                 }
               },
               "AfdSignaling": "NONE",
@@ -396,8 +396,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 400000,
-                  "Bitrate": 200000
+                  "MaxBitrate": 200000,
+                  "Bitrate": 100000
                 }
               },
               "AfdSignaling": "NONE",
@@ -439,12 +439,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 40000000,
+                  "MaxBitrate": 20000000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -486,12 +487,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 14000000,
+                  "MaxBitrate": 7000000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -533,12 +535,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 10000000,
+                  "MaxBitrate": 5000000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -580,12 +583,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 7000000,
+                  "MaxBitrate": 3500000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -627,12 +631,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 4500000,
+                  "MaxBitrate": 2250000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -674,12 +679,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 2400000,
+                  "MaxBitrate": 1200000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -721,12 +727,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 1100000,
+                  "MaxBitrate": 550000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -768,12 +775,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 800000,
+                  "MaxBitrate": 400000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -815,12 +823,13 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 400000,
+                  "MaxBitrate": 200000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "SceneChangeDetect": "TRANSITION_DETECTION",
+                  "WriteMp4PackagingType": "HVC1"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1725,7 +1734,7 @@
   },
   "BillingTagsSource": "JOB",
   "AccelerationSettings": {
-    "Mode": "ENABLED"
+    "Mode": "PREFERRED"
   },
   "StatusUpdateInterval": "SECONDS_60",
   "Priority": 0

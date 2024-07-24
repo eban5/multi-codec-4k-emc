@@ -10,7 +10,9 @@ S3_OUTPUT_PATH = (
 )
 S3_MULTICODEC_OUTPUT_PATH = "s3://pbs-video-dev/4k/multicodec/$fn$-multicodec"
 S3_PBS_VIDEO_DEV_OUTPUT_PATH = "s3://pbs-video-dev/4k/"
-MEDIACONVERT_ROLE_ARN = "arn:aws:iam::676581116332:role/MediaConvert_Default_Role"
+MEDIACONVERT_ROLE_ARN = (
+    "arn:aws:iam::676581116332:role/service-role/MediaConvert_Default_Role"
+)
 
 # codecs = ["VP9", "HEVC", "AVC", "AV1"]
 FRAMESIZES = [2160, 1440, 1080, 960, 720, 640, 432, 360, 234]
@@ -83,19 +85,20 @@ def generate_codec_settings_blocks(codec: Codec, framesize):
         return {
             "Vp9Settings": {
                 "RateControlMode": "VBR",
-                "MaxBitrate": vbr_bitrate_values[framesize][1],
-                "Bitrate": vbr_bitrate_values[framesize][0],
+                "MaxBitrate": math.floor(int(vbr_bitrate_values[framesize][1]) / 2),
+                "Bitrate": math.floor(int(vbr_bitrate_values[framesize][0]) / 2),
             }
         }
     elif codec == Codec.HEVC:
         return {
             "H265Settings": {
-                "MaxBitrate": vbr_bitrate_values[framesize][1],
+                "MaxBitrate": math.floor(int(vbr_bitrate_values[framesize][1]) / 2),
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
                 "QvbrSettings": {
                     "QvbrQualityLevel": 9,  # ? vary this value
                 },
                 "SceneChangeDetect": "TRANSITION_DETECTION",
+                "WriteMp4PackagingType": "HVC1",
             }
         }
 
@@ -196,7 +199,7 @@ job_details = {
                         "DestinationSettings": {
                             "S3Settings": {
                                 "AccessControl": {
-                                    "CannedAcl": "BUCKET_OWNER_FULL_CONTROL"
+                                    "CannedAcl": "BUCKET_OWNER_FULL_CONTROL",
                                 },
                                 "StorageClass": "STANDARD",
                             }
@@ -240,7 +243,7 @@ job_details = {
         ],
     },
     "BillingTagsSource": "JOB",
-    "AccelerationSettings": {"Mode": "ENABLED"},
+    "AccelerationSettings": {"Mode": "PREFERRED"},
     "StatusUpdateInterval": "SECONDS_60",
     "Priority": 0,
 }

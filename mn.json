@@ -1,7 +1,7 @@
 {
   "Queue": "arn:aws:mediaconvert:us-east-1:676581116332:queues/Accelerated",
   "UserMetadata": {},
-  "Role": "arn:aws:iam::676581116332:role/MediaConvert_Default_Role",
+  "Role": "arn:aws:iam::676581116332:role/service-role/MediaConvert_Default_Role",
   "Settings": {
     "TimecodeConfig": {
       "Source": "ZEROBASED"
@@ -1491,7 +1491,7 @@
             "WriteDashManifest": "DISABLED",
             "SegmentLength": 6,
             "MinFinalSegmentLength": 2,
-            "Destination": "s3://pbs-videos-transcoded-ga-staging/poc-4k-test/outputs/test1/$fn$-cmaf",
+            "Destination": "s3://pbs-video-dev/4k/multicodec2/$fn$-maj",
             "DestinationSettings": {
               "S3Settings": {
                 "AccessControl": {
