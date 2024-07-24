@@ -47,13 +47,6 @@ class RateControlMode(Enum):
     AV1 = "QVBR"
 
 
-class ContainerType(Enum):
-    VP9 = "CMFC"
-    HEVC = "CMFC"
-    AVC = "CMFC"
-    AV1 = "CMFC"
-
-
 def generate_image_insertion(codec: Codec, framesize):
     return {
         "ImageInserter": {
@@ -126,9 +119,7 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
 
             video_outputs.append(
                 {
-                    "ContainerSettings": {
-                        "Container": ContainerType[Codec(codec).value].value
-                    },
+                    "ContainerSettings": {"Container": "CMFC"},
                     "VideoDescription": {
                         "Width": framewidth,
                         "ScalingBehavior": "DEFAULT",
@@ -161,11 +152,11 @@ job_details = {
     "Role": MEDIACONVERT_ROLE_ARN,
     "Settings": {
         "TimecodeConfig": {"Source": "ZEROBASED"},
-        # ordered: VP9, HEVC, AVC, AV1
         "OutputGroups": [
             {
                 "CustomName": "multi-codec",
                 "Name": "CMAF",
+                # ordered: VP9, HEVC, AVC, AV1
                 "Outputs": generate_video_outputs(
                     codecs=[Codec.VP9, Codec.HEVC, Codec.AVC, Codec.AV1],
                     framesizes=FRAMESIZES,
@@ -197,7 +188,7 @@ job_details = {
         "Inputs": [
             {
                 "InputClippings": [
-                    # ! DEBUG ONLY only process the first 30 seconds
+                    # ! DEBUG ONLY process a 30 second clip
                     {
                         "EndTimecode": "00:00:30:00",
                         "StartTimecode": "00:00:00:00",
