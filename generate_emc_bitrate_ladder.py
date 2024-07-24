@@ -224,7 +224,7 @@ job_details = {
         ],
     },
     "BillingTagsSource": "JOB",
-    "AccelerationSettings": {"Mode": "PREFERRED"},
+    "AccelerationSettings": {"Mode": "ENABLED"},
     "StatusUpdateInterval": "SECONDS_60",
     "Priority": 0,
 }

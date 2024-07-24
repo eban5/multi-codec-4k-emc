@@ -1388,7 +1388,7 @@
   },
   "BillingTagsSource": "JOB",
   "AccelerationSettings": {
-    "Mode": "PREFERRED"
+    "Mode": "ENABLED"
   },
   "StatusUpdateInterval": "SECONDS_60",
   "Priority": 0
