@@ -5,15 +5,13 @@ from enum import Enum
 S3_FRAMESIZE_BADGE_PATH = "https://static.drm.pbs.org/poc-4k-test/framesizebadges/"
 S3_VIDEO_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.mp4"
 S3_CAPTION_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.scc"
-S3_OUTPUT_PATH = "s3://pbs-videos-transcoded-ga-staging/poc-4k-test/outputs/"
+S3_OUTPUT_PATH = (
+    "s3://pbs-videos-transcoded-ga-staging/poc-4k-test/outputs/test1/$fn$-cmaf"
+)
 S3_MULTICODEC_OUTPUT_PATH = "s3://pbs-video-dev/4k/multicodec/$fn$-multicodec"
 S3_PBS_VIDEO_DEV_OUTPUT_PATH = "s3://pbs-video-dev/4k/"
-# TODO update ARN
-MEDIACONVERT_ROLE_ARN = (
-    "arn:aws:iam::676581116332:role/service-role/MediaConvert_Default_Role"
-)
+MEDIACONVERT_ROLE_ARN = "arn:aws:iam::676581116332:role/MediaConvert_Default_Role"
 
-# TODO manifest duration format should be Floating Point
 # codecs = ["VP9", "HEVC", "AVC", "AV1"]
 FRAMESIZES = [2160, 1440, 1080, 960, 720, 640, 432, 360, 234]
 
@@ -72,11 +70,11 @@ class ContainerType(Enum):
 
 def generate_image_insertion(codec: Codec, framesize):
     return {
-        "Opacity": 50,
-        "ImageInserterInput": f"{S3_FRAMESIZE_BADGE_PATH}{Codec(codec).value}-{framesize}p.png",
-        "Layer": 2,
         "ImageX": 0,
         "ImageY": 0,
+        "Layer": 2,
+        "ImageInserterInput": f"{S3_FRAMESIZE_BADGE_PATH}{Codec(codec).value.lower()}-{framesize}p.png",
+        "Opacity": 50,
     }
 
 
@@ -85,31 +83,31 @@ def generate_codec_settings_blocks(codec: Codec, framesize):
         return {
             "Vp9Settings": {
                 "RateControlMode": "VBR",
-                "Bitrate": vbr_bitrate_values[framesize][0],
                 "MaxBitrate": vbr_bitrate_values[framesize][1],
+                "Bitrate": vbr_bitrate_values[framesize][0],
             }
         }
     elif codec == Codec.HEVC:
         return {
             "H265Settings": {
+                "MaxBitrate": vbr_bitrate_values[framesize][1],
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
-                "SceneChangeDetect": "TRANSITION_DETECTION",
                 "QvbrSettings": {
                     "QvbrQualityLevel": 9,  # ? vary this value
                 },
-                "MaxBitrate": vbr_bitrate_values[framesize][1],
+                "SceneChangeDetect": "TRANSITION_DETECTION",
             }
         }
 
     elif codec == Codec.AVC:
         return {
             "H264Settings": {
+                "MaxBitrate": vbr_bitrate_values[framesize][1],
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
-                "SceneChangeDetect": "TRANSITION_DETECTION",
                 "QvbrSettings": {
                     "QvbrQualityLevel": 9,  # ? vary this value
                 },
-                "MaxBitrate": vbr_bitrate_values[framesize][1],
+                "SceneChangeDetect": "TRANSITION_DETECTION",
             }
         }
     elif codec == Codec.AV1:
@@ -133,6 +131,9 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
 
             video_outputs.append(
                 {
+                    "ContainerSettings": {
+                        "Container": ContainerType[Codec(codec).value].value
+                    },
                     "VideoDescription": {
                         "Width": framewidth,
                         "ScalingBehavior": "DEFAULT",
@@ -162,9 +163,6 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
                         "RespondToAfd": "NONE",
                         "ColorMetadata": "INSERT",
                     },
-                    "ContainerSettings": {
-                        "Container": ContainerType[Codec(codec).value].value
-                    },
                     "NameModifier": f"-{Codec(codec).value.lower()}-{framesize}",
                 }
             )
@@ -173,13 +171,62 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
 
 
 job_details = {
+    "Queue": "arn:aws:mediaconvert:us-east-1:676581116332:queues/Accelerated",
+    "UserMetadata": {},
+    "Role": MEDIACONVERT_ROLE_ARN,
     "Settings": {
+        "TimecodeConfig": {"Source": "ZEROBASED"},
+        # ordered: VP9, HEVC, AVC, AV1
+        "OutputGroups": [
+            {
+                "CustomName": "multi-codec",
+                "Name": "CMAF",
+                "Outputs": generate_video_outputs(
+                    codecs=[Codec.VP9, Codec.HEVC, Codec.AVC, Codec.AV1],
+                    framesizes=FRAMESIZES,
+                ),
+                "OutputGroupSettings": {
+                    "Type": "CMAF_GROUP_SETTINGS",
+                    "CmafGroupSettings": {
+                        "TargetDurationCompatibilityMode": "SPEC_COMPLIANT",
+                        "WriteDashManifest": "DISABLED",
+                        "SegmentLength": 6,
+                        "MinFinalSegmentLength": 2,
+                        "Destination": S3_OUTPUT_PATH,
+                        "DestinationSettings": {
+                            "S3Settings": {
+                                "AccessControl": {
+                                    "CannedAcl": "BUCKET_OWNER_FULL_CONTROL"
+                                },
+                                "StorageClass": "STANDARD",
+                            }
+                        },
+                        "FragmentLength": 2,
+                        "SegmentControl": "SEGMENTED_FILES",
+                        "ManifestDurationFormat": "FLOATING_POINT",
+                        "CodecSpecification": "RFC_6381",
+                    },
+                },
+            },
+        ],
+        "FollowSource": 1,
         "Inputs": [
             {
-                "TimecodeSource": "ZEROBASED",
+                "InputClippings": [
+                    # ! DEBUG ONLY only process the first 30 seconds
+                    {
+                        "EndTimecode": "00:00:30:00",
+                        "StartTimecode": "00:00:00:00",
+                    }
+                ],
+                "AudioSelectors": {
+                    "Audio Selector 1": {
+                        "DefaultSelection": "DEFAULT",
+                        "AudioDurationCorrection": "AUTO",
+                    }
+                },
                 "VideoSelector": {},
-                "AudioSelectors": {"Audio Selector 1": {"DefaultSelection": "DEFAULT"}},
-                "FileInput": S3_VIDEO_FILE_URI,
+                "TimecodeSource": "ZEROBASED",
                 "CaptionSelectors": {
                     "Captions Selector 1": {
                         "SourceSettings": {
@@ -188,48 +235,14 @@ job_details = {
                         }
                     }
                 },
-                "InputClippings": [
-                    # ! DEBUG ONLY only process the first 30 seconds
-                    {"StartTimecode": "00:00:00:00", "EndTimecode": "00:00:30:00"}
-                ],
+                "FileInput": S3_VIDEO_FILE_URI,
             }
         ],
-        # ordered: VP9, HEVC, AVC, AV1
-        "OutputGroups": [
-            # {
-            #     "Name": output_groups["VP9"][0],
-            #     "OutputGroupSettings": {
-            #         "Type": output_groups["VP9"][1],
-            #         "CmafGroupSettings": {
-            #             "SegmentLength": 10,
-            #             "FragmentLength": 2,
-            #             "Destination": S3_OUTPUT_PATH,
-            #         },
-            #     },
-            #     "Outputs": generate_video_outputs(codecs=[], framesizes=FRAMESIZES),
-            #     "CustomName": "group_vp9",
-            # },
-            {
-                "Name": "CMAF",
-                "OutputGroupSettings": {
-                    "Type": "CMAF_GROUP_SETTINGS",
-                    "CmafGroupSettings": {
-                        "SegmentLength": 10,
-                        "FragmentLength": 2,
-                        "Destination": S3_OUTPUT_PATH,
-                    },
-                },
-                "Outputs": generate_video_outputs(
-                    codecs=[Codec.VP9, Codec.HEVC, Codec.AVC, Codec.AV1],
-                    framesizes=FRAMESIZES,
-                ),
-                "CustomName": "multi-codec",
-            },
-        ],
-        "TimecodeConfig": {"Source": "ZEROBASED"},
-        "FollowSource": 1,
     },
-    "Role": MEDIACONVERT_ROLE_ARN,
+    "BillingTagsSource": "JOB",
+    "AccelerationSettings": {"Mode": "ENABLED"},
+    "StatusUpdateInterval": "SECONDS_60",
+    "Priority": 0,
 }
 
 
