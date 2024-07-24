@@ -5,17 +5,12 @@ from enum import Enum
 S3_FRAMESIZE_BADGE_PATH = "https://static.drm.pbs.org/poc-4k-test/framesizebadges/"
 S3_VIDEO_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.mp4"
 S3_CAPTION_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.scc"
-S3_OUTPUT_PATH = (
-    "s3://pbs-videos-transcoded-ga-staging/poc-4k-test/outputs/test1/$fn$-cmaf"
-)
-S3_MULTICODEC_OUTPUT_PATH = "s3://pbs-video-dev/4k/multicodec/$fn$-multicodec"
-S3_PBS_VIDEO_DEV_OUTPUT_PATH = "s3://pbs-video-dev/4k/"
+S3_OUTPUT_PATH = "s3://pbs-video-dev/4k/multicodec2/$fn$"
 MEDIACONVERT_ROLE_ARN = (
     "arn:aws:iam::676581116332:role/service-role/MediaConvert_Default_Role"
 )
 
-# codecs = ["VP9", "HEVC", "AVC", "AV1"]
-FRAMESIZES = [2160, 1440, 1080, 960, 720, 640, 432, 360, 234]
+FRAMESIZES = [2160, 1440, 1080, 960, 720, 432, 360, 234]
 
 # framesize: (bitrate, max_bitrate)
 vbr_bitrate_values = {
@@ -24,7 +19,6 @@ vbr_bitrate_values = {
     1080: (8000000, 10000000),
     960: (5000000, 7000000),
     720: (2500000, 4500000),
-    640: (1600000, 2400000),
     432: (900000, 1100000),
     360: (600000, 800000),
     234: (200000, 400000),
@@ -46,15 +40,6 @@ class CodecAwsName(Enum):
     AV1 = "AV1"
 
 
-# output_groups = {
-#     # "VP9": ("DASH ISO", "DASH_ISO_GROUP_SETTINGS"),
-#     "VP9": ("CMAF", "CMAF_GROUP_SETTINGS"),
-#     "HEVC": ("CMAF", "CMAF_GROUP_SETTINGS"),
-#     "AVC": ("CMAF", "CMAF_GROUP_SETTINGS"),
-#     "AV1": ("CMAF", "CMAF_GROUP_SETTINGS"),
-# }
-
-
 class RateControlMode(Enum):
     VP9 = "VBR"
     HEVC = "QVBR"
@@ -63,7 +48,6 @@ class RateControlMode(Enum):
 
 
 class ContainerType(Enum):
-    # VP9 = "MP4"
     VP9 = "CMFC"
     HEVC = "CMFC"
     AVC = "CMFC"
@@ -72,15 +56,23 @@ class ContainerType(Enum):
 
 def generate_image_insertion(codec: Codec, framesize):
     return {
-        "ImageX": 0,
-        "ImageY": 0,
-        "Layer": 2,
-        "ImageInserterInput": f"{S3_FRAMESIZE_BADGE_PATH}{Codec(codec).value.lower()}-{framesize}p.png",
-        "Opacity": 50,
+        "ImageInserter": {
+            "InsertableImages": [
+                {
+                    "ImageX": 0,
+                    "ImageY": 0,
+                    "Layer": 2,
+                    "ImageInserterInput": f"{S3_FRAMESIZE_BADGE_PATH}{Codec(codec).value.lower()}-{framesize}p.png",
+                    "Opacity": 50,
+                }
+            ]
+        },
     }
 
 
-def generate_codec_settings_blocks(codec: Codec, framesize):
+# TODO vary QvbrQualityLevel
+# TODO fill out the rest of the codec settings
+def generate_codec_settings_block(codec: Codec, framesize):
     if codec == Codec.VP9:
         return {
             "Vp9Settings": {
@@ -95,7 +87,7 @@ def generate_codec_settings_blocks(codec: Codec, framesize):
                 "MaxBitrate": math.floor(int(vbr_bitrate_values[framesize][1]) / 2),
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
                 "QvbrSettings": {
-                    "QvbrQualityLevel": 9,  # ? vary this value
+                    "QvbrQualityLevel": 9,
                 },
                 "SceneChangeDetect": "TRANSITION_DETECTION",
                 "WriteMp4PackagingType": "HVC1",
@@ -108,7 +100,7 @@ def generate_codec_settings_blocks(codec: Codec, framesize):
                 "MaxBitrate": vbr_bitrate_values[framesize][1],
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
                 "QvbrSettings": {
-                    "QvbrQualityLevel": 9,  # ? vary this value
+                    "QvbrQualityLevel": 9,
                 },
                 "SceneChangeDetect": "TRANSITION_DETECTION",
             }
@@ -118,7 +110,7 @@ def generate_codec_settings_blocks(codec: Codec, framesize):
             "Av1Settings": {
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
                 "QvbrSettings": {
-                    "QvbrQualityLevel": 9,  # ? vary this value
+                    "QvbrQualityLevel": 9,
                 },
                 "MaxBitrate": vbr_bitrate_values[framesize][1],
             }
@@ -142,24 +134,14 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
                         "ScalingBehavior": "DEFAULT",
                         "Height": frameheight,
                         "VideoPreprocessors": {
-                            "Deinterlacer": {
-                                "Algorithm": "INTERPOLATE",
-                                "Mode": "DEINTERLACE",
-                                "Control": "NORMAL",
-                            },
-                            "ImageInserter": {
-                                "InsertableImages": [
-                                    generate_image_insertion(codec, framesize)
-                                ]
-                            },
+                            **generate_image_insertion(codec, framesize),
                         },
                         "TimecodeInsertion": "DISABLED",
                         "AntiAlias": "ENABLED",
                         "Sharpness": 100,
                         "CodecSettings": {
                             "Codec": CodecAwsName[Codec(codec).value].value,
-                            # add the result of codec_settings_block
-                            **generate_codec_settings_blocks(codec, framesize),
+                            **generate_codec_settings_block(codec, framesize),
                         },
                         "AfdSignaling": "NONE",
                         "DropFrameTimecode": "ENABLED",
@@ -200,8 +182,7 @@ job_details = {
                             "S3Settings": {
                                 "AccessControl": {
                                     "CannedAcl": "BUCKET_OWNER_FULL_CONTROL",
-                                },
-                                "StorageClass": "STANDARD",
+                                }
                             }
                         },
                         "FragmentLength": 2,

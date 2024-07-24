@@ -20,11 +20,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 2160,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -64,11 +59,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 1440,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -108,11 +98,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 1080,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -152,11 +137,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 960,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -196,11 +176,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 720,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -236,59 +211,10 @@
               "Container": "CMFC"
             },
             "VideoDescription": {
-              "Width": 1137,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 640,
-              "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/vp9-640p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "VP9",
-                "Vp9Settings": {
-                  "RateControlMode": "VBR",
-                  "MaxBitrate": 1200000,
-                  "Bitrate": 800000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-vp9-640"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
               "Width": 768,
               "ScalingBehavior": "DEFAULT",
               "Height": 432,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -328,11 +254,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 360,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -372,11 +293,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 234,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -416,11 +332,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 2160,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -464,11 +375,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 1440,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -512,11 +418,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 1080,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -560,11 +461,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 960,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -608,11 +504,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 720,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -652,63 +543,10 @@
               "Container": "CMFC"
             },
             "VideoDescription": {
-              "Width": 1137,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 640,
-              "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-640p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "MaxBitrate": 1200000,
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-640"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
               "Width": 768,
               "ScalingBehavior": "DEFAULT",
               "Height": 432,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -752,11 +590,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 360,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -800,11 +633,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 234,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -848,11 +676,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 2160,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -895,11 +718,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 1440,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -942,11 +760,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 1080,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -989,11 +802,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 960,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1036,11 +844,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 720,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1079,62 +882,10 @@
               "Container": "CMFC"
             },
             "VideoDescription": {
-              "Width": 1137,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 640,
-              "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/avc-640p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_264",
-                "H264Settings": {
-                  "MaxBitrate": 2400000,
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-avc-640"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
               "Width": 768,
               "ScalingBehavior": "DEFAULT",
               "Height": 432,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1177,11 +928,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 360,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1224,11 +970,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 234,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1271,11 +1012,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 2160,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1317,11 +1053,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 1440,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1363,11 +1094,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 1080,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1409,11 +1135,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 960,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1455,11 +1176,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 720,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1497,61 +1213,10 @@
               "Container": "CMFC"
             },
             "VideoDescription": {
-              "Width": 1137,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 640,
-              "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-640p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 2400000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-640"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
               "Width": 768,
               "ScalingBehavior": "DEFAULT",
               "Height": 432,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1593,11 +1258,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 360,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1639,11 +1299,6 @@
               "ScalingBehavior": "DEFAULT",
               "Height": 234,
               "VideoPreprocessors": {
-                "Deinterlacer": {
-                  "Algorithm": "INTERPOLATE",
-                  "Mode": "DEINTERLACE",
-                  "Control": "NORMAL"
-                },
                 "ImageInserter": {
                   "InsertableImages": [
                     {
@@ -1684,13 +1339,12 @@
             "WriteDashManifest": "DISABLED",
             "SegmentLength": 6,
             "MinFinalSegmentLength": 2,
-            "Destination": "s3://pbs-videos-transcoded-ga-staging/poc-4k-test/outputs/test1/$fn$-cmaf",
+            "Destination": "s3://pbs-video-dev/4k/multicodec2/$fn$",
             "DestinationSettings": {
               "S3Settings": {
                 "AccessControl": {
                   "CannedAcl": "BUCKET_OWNER_FULL_CONTROL"
-                },
-                "StorageClass": "STANDARD"
+                }
               }
             },
             "FragmentLength": 2,
