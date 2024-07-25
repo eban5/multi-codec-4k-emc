@@ -14,8 +14,8 @@ FRAMESIZES = [2160, 1440, 1080, 960, 720, 432, 360, 234]
 
 # framesize: (bitrate, max_bitrate)
 vbr_bitrate_values = {
-    2160: (20000000, 40000000),
-    1440: (12000000, 14000000),
+    2160: (10000000, 20000000),
+    1440: (10000000, 12000000),
     1080: (8000000, 10000000),
     960: (5000000, 7000000),
     720: (2500000, 4500000),
@@ -63,9 +63,9 @@ def generate_image_insertion(codec: Codec, framesize):
     }
 
 
-# TODO vary QvbrQualityLevel
 # TODO fill out the rest of the codec settings
 def generate_codec_settings_block(codec: Codec, framesize):
+    qvbr_quality_level = 9 if framesize < 720 else 4
     if codec == Codec.VP9:
         return {
             "Vp9Settings": {
@@ -75,15 +75,40 @@ def generate_codec_settings_block(codec: Codec, framesize):
             }
         }
     elif codec == Codec.HEVC:
+        max_bitrate_hevc = math.floor(int(vbr_bitrate_values[framesize][1]) / 2)
         return {
             "H265Settings": {
-                "MaxBitrate": math.floor(int(vbr_bitrate_values[framesize][1]) / 2),
+                "InterlaceMode": "PROGRESSIVE",
+                "NumberReferenceFrames": 3,
+                "GopClosedCadence": 1,
+                "AlternateTransferFunctionSei": "DISABLED",
+                "HrdBufferInitialFillPercentage": 90,
+                "GopSize": 3,
+                "Slices": 4 if framesize < 720 else 2,
+                "GopBReference": "ENABLED",
+                "HrdBufferSize": max_bitrate_hevc * 2,  # Todo vary this
+                "MaxBitrate": max_bitrate_hevc,
+                "SpatialAdaptiveQuantization": "ENABLED",
+                "TemporalAdaptiveQuantization": "ENABLED",
+                "FlickerAdaptiveQuantization": "ENABLED",
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
                 "QvbrSettings": {
-                    "QvbrQualityLevel": 9,
+                    "QvbrQualityLevel": qvbr_quality_level,
                 },
-                "SceneChangeDetect": "TRANSITION_DETECTION",
+                "CodecProfile": "MAIN_MAIN",
+                "Tiles": "ENABLED",
+                "MinIInterval": 0,
+                "AdaptiveQuantization": "HIGH",
+                "CodecLevel": "AUTO",
+                "SceneChangeDetect": "ENABLED",
+                "QualityTuningLevel": "SINGLE_PASS_HQ",
+                "UnregisteredSeiTimecode": "DISABLED",
+                "GopSizeUnits": "SECONDS",
+                "NumberBFramesBetweenReferenceFrames": 3,
+                "TemporalIds": "DISABLED",
+                "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
                 "WriteMp4PackagingType": "HVC1",
+                "DynamicSubGop": "ADAPTIVE",
             }
         }
 
@@ -93,7 +118,7 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "MaxBitrate": vbr_bitrate_values[framesize][1],
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
                 "QvbrSettings": {
-                    "QvbrQualityLevel": 9,
+                    "QvbrQualityLevel": qvbr_quality_level,
                 },
                 "SceneChangeDetect": "TRANSITION_DETECTION",
             }
@@ -103,7 +128,7 @@ def generate_codec_settings_block(codec: Codec, framesize):
             "Av1Settings": {
                 "RateControlMode": RateControlMode[Codec(codec).value].value,
                 "QvbrSettings": {
-                    "QvbrQualityLevel": 9,
+                    "QvbrQualityLevel": qvbr_quality_level,
                 },
                 "MaxBitrate": vbr_bitrate_values[framesize][1],
             }
@@ -157,8 +182,14 @@ job_details = {
                 "CustomName": "multi-codec",
                 "Name": "CMAF",
                 # ordered: VP9, HEVC, AVC, AV1
+                # experimenting with AV1 first 20240725-1209
                 "Outputs": generate_video_outputs(
-                    codecs=[Codec.VP9, Codec.HEVC, Codec.AVC, Codec.AV1],
+                    codecs=[
+                        Codec.AV1,
+                        Codec.VP9,
+                        Codec.HEVC,
+                        Codec.AVC,
+                    ],
                     framesizes=FRAMESIZES,
                 ),
                 "OutputGroupSettings": {

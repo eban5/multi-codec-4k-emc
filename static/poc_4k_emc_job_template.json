@@ -26,6 +26,334 @@
                       "ImageX": 0,
                       "ImageY": 0,
                       "Layer": 2,
+                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-2160p.png",
+                      "Opacity": 50
+                    }
+                  ]
+                }
+              },
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 100,
+              "CodecSettings": {
+                "Codec": "AV1",
+                "Av1Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 4
+                  },
+                  "MaxBitrate": 20000000
+                }
+              },
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "NameModifier": "-av1-2160"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "CMFC"
+            },
+            "VideoDescription": {
+              "Width": 2560,
+              "ScalingBehavior": "DEFAULT",
+              "Height": 1440,
+              "VideoPreprocessors": {
+                "ImageInserter": {
+                  "InsertableImages": [
+                    {
+                      "ImageX": 0,
+                      "ImageY": 0,
+                      "Layer": 2,
+                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-1440p.png",
+                      "Opacity": 50
+                    }
+                  ]
+                }
+              },
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 100,
+              "CodecSettings": {
+                "Codec": "AV1",
+                "Av1Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 4
+                  },
+                  "MaxBitrate": 12000000
+                }
+              },
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "NameModifier": "-av1-1440"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "CMFC"
+            },
+            "VideoDescription": {
+              "Width": 1920,
+              "ScalingBehavior": "DEFAULT",
+              "Height": 1080,
+              "VideoPreprocessors": {
+                "ImageInserter": {
+                  "InsertableImages": [
+                    {
+                      "ImageX": 0,
+                      "ImageY": 0,
+                      "Layer": 2,
+                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-1080p.png",
+                      "Opacity": 50
+                    }
+                  ]
+                }
+              },
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 100,
+              "CodecSettings": {
+                "Codec": "AV1",
+                "Av1Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 4
+                  },
+                  "MaxBitrate": 10000000
+                }
+              },
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "NameModifier": "-av1-1080"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "CMFC"
+            },
+            "VideoDescription": {
+              "Width": 1706,
+              "ScalingBehavior": "DEFAULT",
+              "Height": 960,
+              "VideoPreprocessors": {
+                "ImageInserter": {
+                  "InsertableImages": [
+                    {
+                      "ImageX": 0,
+                      "ImageY": 0,
+                      "Layer": 2,
+                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-960p.png",
+                      "Opacity": 50
+                    }
+                  ]
+                }
+              },
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 100,
+              "CodecSettings": {
+                "Codec": "AV1",
+                "Av1Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 4
+                  },
+                  "MaxBitrate": 7000000
+                }
+              },
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "NameModifier": "-av1-960"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "CMFC"
+            },
+            "VideoDescription": {
+              "Width": 1280,
+              "ScalingBehavior": "DEFAULT",
+              "Height": 720,
+              "VideoPreprocessors": {
+                "ImageInserter": {
+                  "InsertableImages": [
+                    {
+                      "ImageX": 0,
+                      "ImageY": 0,
+                      "Layer": 2,
+                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-720p.png",
+                      "Opacity": 50
+                    }
+                  ]
+                }
+              },
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 100,
+              "CodecSettings": {
+                "Codec": "AV1",
+                "Av1Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 4
+                  },
+                  "MaxBitrate": 4500000
+                }
+              },
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "NameModifier": "-av1-720"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "CMFC"
+            },
+            "VideoDescription": {
+              "Width": 768,
+              "ScalingBehavior": "DEFAULT",
+              "Height": 432,
+              "VideoPreprocessors": {
+                "ImageInserter": {
+                  "InsertableImages": [
+                    {
+                      "ImageX": 0,
+                      "ImageY": 0,
+                      "Layer": 2,
+                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-432p.png",
+                      "Opacity": 50
+                    }
+                  ]
+                }
+              },
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 100,
+              "CodecSettings": {
+                "Codec": "AV1",
+                "Av1Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 9
+                  },
+                  "MaxBitrate": 1100000
+                }
+              },
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "NameModifier": "-av1-432"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "CMFC"
+            },
+            "VideoDescription": {
+              "Width": 640,
+              "ScalingBehavior": "DEFAULT",
+              "Height": 360,
+              "VideoPreprocessors": {
+                "ImageInserter": {
+                  "InsertableImages": [
+                    {
+                      "ImageX": 0,
+                      "ImageY": 0,
+                      "Layer": 2,
+                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-360p.png",
+                      "Opacity": 50
+                    }
+                  ]
+                }
+              },
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 100,
+              "CodecSettings": {
+                "Codec": "AV1",
+                "Av1Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 9
+                  },
+                  "MaxBitrate": 800000
+                }
+              },
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "NameModifier": "-av1-360"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "CMFC"
+            },
+            "VideoDescription": {
+              "Width": 416,
+              "ScalingBehavior": "DEFAULT",
+              "Height": 234,
+              "VideoPreprocessors": {
+                "ImageInserter": {
+                  "InsertableImages": [
+                    {
+                      "ImageX": 0,
+                      "ImageY": 0,
+                      "Layer": 2,
+                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-234p.png",
+                      "Opacity": 50
+                    }
+                  ]
+                }
+              },
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 100,
+              "CodecSettings": {
+                "Codec": "AV1",
+                "Av1Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 9
+                  },
+                  "MaxBitrate": 400000
+                }
+              },
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "NameModifier": "-av1-234"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "CMFC"
+            },
+            "VideoDescription": {
+              "Width": 3840,
+              "ScalingBehavior": "DEFAULT",
+              "Height": 2160,
+              "VideoPreprocessors": {
+                "ImageInserter": {
+                  "InsertableImages": [
+                    {
+                      "ImageX": 0,
+                      "ImageY": 0,
+                      "Layer": 2,
                       "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/vp9-2160p.png",
                       "Opacity": 50
                     }
@@ -39,8 +367,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 20000000,
-                  "Bitrate": 10000000
+                  "MaxBitrate": 10000000,
+                  "Bitrate": 5000000
                 }
               },
               "AfdSignaling": "NONE",
@@ -78,8 +406,8 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 7000000,
-                  "Bitrate": 6000000
+                  "MaxBitrate": 6000000,
+                  "Bitrate": 5000000
                 }
               },
               "AfdSignaling": "NONE",
@@ -350,13 +678,37 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 20000000,
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "GopClosedCadence": 1,
+                  "AlternateTransferFunctionSei": "DISABLED",
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 2,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 20000000,
+                  "MaxBitrate": 10000000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
+                  "CodecProfile": "MAIN_MAIN",
+                  "Tiles": "ENABLED",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "TemporalIds": "DISABLED",
+                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
+                  "WriteMp4PackagingType": "HVC1",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -393,13 +745,37 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
-                  "MaxBitrate": 7000000,
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "GopClosedCadence": 1,
+                  "AlternateTransferFunctionSei": "DISABLED",
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 2,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 12000000,
+                  "MaxBitrate": 6000000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
+                  "CodecProfile": "MAIN_MAIN",
+                  "Tiles": "ENABLED",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "TemporalIds": "DISABLED",
+                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
+                  "WriteMp4PackagingType": "HVC1",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -436,13 +812,37 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "GopClosedCadence": 1,
+                  "AlternateTransferFunctionSei": "DISABLED",
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 2,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 10000000,
                   "MaxBitrate": 5000000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
+                  "CodecProfile": "MAIN_MAIN",
+                  "Tiles": "ENABLED",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "TemporalIds": "DISABLED",
+                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
+                  "WriteMp4PackagingType": "HVC1",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -479,13 +879,37 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "GopClosedCadence": 1,
+                  "AlternateTransferFunctionSei": "DISABLED",
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 2,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 7000000,
                   "MaxBitrate": 3500000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
+                  "CodecProfile": "MAIN_MAIN",
+                  "Tiles": "ENABLED",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "TemporalIds": "DISABLED",
+                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
+                  "WriteMp4PackagingType": "HVC1",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -522,13 +946,37 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "GopClosedCadence": 1,
+                  "AlternateTransferFunctionSei": "DISABLED",
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 2,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 4500000,
                   "MaxBitrate": 2250000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
+                  "CodecProfile": "MAIN_MAIN",
+                  "Tiles": "ENABLED",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "TemporalIds": "DISABLED",
+                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
+                  "WriteMp4PackagingType": "HVC1",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -565,13 +1013,37 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "GopClosedCadence": 1,
+                  "AlternateTransferFunctionSei": "DISABLED",
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 1100000,
                   "MaxBitrate": 550000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
+                  "CodecProfile": "MAIN_MAIN",
+                  "Tiles": "ENABLED",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "TemporalIds": "DISABLED",
+                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
+                  "WriteMp4PackagingType": "HVC1",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -608,13 +1080,37 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "GopClosedCadence": 1,
+                  "AlternateTransferFunctionSei": "DISABLED",
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 800000,
                   "MaxBitrate": 400000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
+                  "CodecProfile": "MAIN_MAIN",
+                  "Tiles": "ENABLED",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "TemporalIds": "DISABLED",
+                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
+                  "WriteMp4PackagingType": "HVC1",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -651,13 +1147,37 @@
               "CodecSettings": {
                 "Codec": "H_265",
                 "H265Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "GopClosedCadence": 1,
+                  "AlternateTransferFunctionSei": "DISABLED",
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 400000,
                   "MaxBitrate": 200000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION",
-                  "WriteMp4PackagingType": "HVC1"
+                  "CodecProfile": "MAIN_MAIN",
+                  "Tiles": "ENABLED",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "TemporalIds": "DISABLED",
+                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
+                  "WriteMp4PackagingType": "HVC1",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -694,10 +1214,10 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
-                  "MaxBitrate": 40000000,
+                  "MaxBitrate": 20000000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
                   "SceneChangeDetect": "TRANSITION_DETECTION"
                 }
@@ -736,10 +1256,10 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
-                  "MaxBitrate": 14000000,
+                  "MaxBitrate": 12000000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
                   "SceneChangeDetect": "TRANSITION_DETECTION"
                 }
@@ -781,7 +1301,7 @@
                   "MaxBitrate": 10000000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
                   "SceneChangeDetect": "TRANSITION_DETECTION"
                 }
@@ -823,7 +1343,7 @@
                   "MaxBitrate": 7000000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
                   "SceneChangeDetect": "TRANSITION_DETECTION"
                 }
@@ -865,7 +1385,7 @@
                   "MaxBitrate": 4500000,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 4
                   },
                   "SceneChangeDetect": "TRANSITION_DETECTION"
                 }
@@ -1002,334 +1522,6 @@
               "ColorMetadata": "INSERT"
             },
             "NameModifier": "-avc-234"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 3840,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 2160,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-2160p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 40000000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-2160"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 2560,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 1440,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-1440p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 14000000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-1440"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 1920,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 1080,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-1080p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 10000000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-1080"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 1706,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 960,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-960p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 7000000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-960"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 1280,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 720,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-720p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 4500000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-720"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 768,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 432,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-432p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 1100000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-432"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 640,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 360,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-360p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 800000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-360"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 416,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 234,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/av1-234p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "AV1",
-                "Av1Settings": {
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "MaxBitrate": 400000
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-av1-234"
           }
         ],
         "OutputGroupSettings": {
