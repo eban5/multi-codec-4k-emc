@@ -45,7 +45,7 @@
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 20000000,
+                  "MaxBitrate": 12000000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -407,7 +407,7 @@
                 "Codec": "VP9",
                 "Vp9Settings": {
                   "RateControlMode": "VBR",
-                  "MaxBitrate": 10000000,
+                  "MaxBitrate": 6000000,
                   "Bitrate": 5000000
                 }
               },
@@ -726,8 +726,8 @@
                   "GopSize": 3,
                   "Slices": 2,
                   "GopBReference": "ENABLED",
-                  "HrdBufferSize": 20000000,
-                  "MaxBitrate": 10000000,
+                  "HrdBufferSize": 12000000,
+                  "MaxBitrate": 6000000,
                   "SpatialAdaptiveQuantization": "ENABLED",
                   "TemporalAdaptiveQuantization": "ENABLED",
                   "FlickerAdaptiveQuantization": "ENABLED",
@@ -1262,8 +1262,8 @@
                   "GopSize": 3,
                   "Slices": 4,
                   "GopBReference": "ENABLED",
-                  "HrdBufferSize": 40000000,
-                  "MaxBitrate": 20000000,
+                  "HrdBufferSize": 24000000,
+                  "MaxBitrate": 12000000,
                   "SpatialAdaptiveQuantization": "ENABLED",
                   "TemporalAdaptiveQuantization": "ENABLED",
                   "FlickerAdaptiveQuantization": "ENABLED",
