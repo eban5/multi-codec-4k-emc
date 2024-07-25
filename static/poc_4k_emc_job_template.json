@@ -38,11 +38,16 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
+                  "GopSize": 129,
+                  "NumberBFramesBetweenReferenceFrames": 15,
+                  "Slices": 1,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 20000000
+                  "MaxBitrate": 20000000,
+                  "AdaptiveQuantization": "MEDIUM",
+                  "SpatialAdaptiveQuantization": "ENABLED"
                 }
               },
               "AfdSignaling": "NONE",
@@ -79,11 +84,16 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
+                  "GopSize": 129,
+                  "NumberBFramesBetweenReferenceFrames": 15,
+                  "Slices": 1,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 12000000
+                  "MaxBitrate": 12000000,
+                  "AdaptiveQuantization": "MEDIUM",
+                  "SpatialAdaptiveQuantization": "ENABLED"
                 }
               },
               "AfdSignaling": "NONE",
@@ -120,11 +130,16 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
+                  "GopSize": 129,
+                  "NumberBFramesBetweenReferenceFrames": 15,
+                  "Slices": 1,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 10000000
+                  "MaxBitrate": 10000000,
+                  "AdaptiveQuantization": "MEDIUM",
+                  "SpatialAdaptiveQuantization": "ENABLED"
                 }
               },
               "AfdSignaling": "NONE",
@@ -161,11 +176,16 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
+                  "GopSize": 129,
+                  "NumberBFramesBetweenReferenceFrames": 15,
+                  "Slices": 1,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 7000000
+                  "MaxBitrate": 7000000,
+                  "AdaptiveQuantization": "MEDIUM",
+                  "SpatialAdaptiveQuantization": "ENABLED"
                 }
               },
               "AfdSignaling": "NONE",
@@ -202,11 +222,16 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
+                  "GopSize": 129,
+                  "NumberBFramesBetweenReferenceFrames": 15,
+                  "Slices": 1,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 4500000
+                  "MaxBitrate": 4500000,
+                  "AdaptiveQuantization": "MEDIUM",
+                  "SpatialAdaptiveQuantization": "ENABLED"
                 }
               },
               "AfdSignaling": "NONE",
@@ -243,11 +268,16 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
+                  "GopSize": 129,
+                  "NumberBFramesBetweenReferenceFrames": 15,
+                  "Slices": 1,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 7
                   },
-                  "MaxBitrate": 1100000
+                  "MaxBitrate": 1100000,
+                  "AdaptiveQuantization": "MEDIUM",
+                  "SpatialAdaptiveQuantization": "ENABLED"
                 }
               },
               "AfdSignaling": "NONE",
@@ -284,11 +314,16 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
+                  "GopSize": 129,
+                  "NumberBFramesBetweenReferenceFrames": 15,
+                  "Slices": 1,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 7
                   },
-                  "MaxBitrate": 800000
+                  "MaxBitrate": 800000,
+                  "AdaptiveQuantization": "MEDIUM",
+                  "SpatialAdaptiveQuantization": "ENABLED"
                 }
               },
               "AfdSignaling": "NONE",
@@ -325,11 +360,16 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
+                  "GopSize": 129,
+                  "NumberBFramesBetweenReferenceFrames": 15,
+                  "Slices": 1,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
-                    "QvbrQualityLevel": 9
+                    "QvbrQualityLevel": 7
                   },
-                  "MaxBitrate": 400000
+                  "MaxBitrate": 400000,
+                  "AdaptiveQuantization": "MEDIUM",
+                  "SpatialAdaptiveQuantization": "ENABLED"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1214,12 +1254,36 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "Syntax": "DEFAULT",
+                  "GopClosedCadence": 1,
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 40000000,
                   "MaxBitrate": 20000000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
+                  "EntropyEncoding": "CABAC",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "CodecProfile": "HIGH",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "FieldEncoding": "PAFF",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "RepeatPps": "DISABLED",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1256,12 +1320,36 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "Syntax": "DEFAULT",
+                  "GopClosedCadence": 1,
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 24000000,
                   "MaxBitrate": 12000000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
+                  "EntropyEncoding": "CABAC",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "CodecProfile": "HIGH",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "FieldEncoding": "PAFF",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "RepeatPps": "DISABLED",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1298,12 +1386,36 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "Syntax": "DEFAULT",
+                  "GopClosedCadence": 1,
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 20000000,
                   "MaxBitrate": 10000000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
+                  "EntropyEncoding": "CABAC",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "CodecProfile": "HIGH",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "FieldEncoding": "PAFF",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "RepeatPps": "DISABLED",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1340,12 +1452,36 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "Syntax": "DEFAULT",
+                  "GopClosedCadence": 1,
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 14000000,
                   "MaxBitrate": 7000000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
+                  "EntropyEncoding": "CABAC",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "CodecProfile": "HIGH",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "FieldEncoding": "PAFF",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "RepeatPps": "DISABLED",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1382,12 +1518,36 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "Syntax": "DEFAULT",
+                  "GopClosedCadence": 1,
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 9000000,
                   "MaxBitrate": 4500000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
+                  "EntropyEncoding": "CABAC",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "CodecProfile": "HIGH",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "FieldEncoding": "PAFF",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "RepeatPps": "DISABLED",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1424,12 +1584,36 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "Syntax": "DEFAULT",
+                  "GopClosedCadence": 1,
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 2200000,
                   "MaxBitrate": 1100000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
+                  "EntropyEncoding": "CABAC",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "CodecProfile": "HIGH",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "FieldEncoding": "PAFF",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "RepeatPps": "DISABLED",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1466,12 +1650,36 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "Syntax": "DEFAULT",
+                  "GopClosedCadence": 1,
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 1600000,
                   "MaxBitrate": 800000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
+                  "EntropyEncoding": "CABAC",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "CodecProfile": "HIGH",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "FieldEncoding": "PAFF",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "RepeatPps": "DISABLED",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",
@@ -1508,12 +1716,36 @@
               "CodecSettings": {
                 "Codec": "H_264",
                 "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "NumberReferenceFrames": 3,
+                  "Syntax": "DEFAULT",
+                  "GopClosedCadence": 1,
+                  "HrdBufferInitialFillPercentage": 90,
+                  "GopSize": 3,
+                  "Slices": 4,
+                  "GopBReference": "ENABLED",
+                  "HrdBufferSize": 800000,
                   "MaxBitrate": 400000,
+                  "SpatialAdaptiveQuantization": "ENABLED",
+                  "TemporalAdaptiveQuantization": "ENABLED",
+                  "FlickerAdaptiveQuantization": "ENABLED",
+                  "EntropyEncoding": "CABAC",
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 9
                   },
-                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                  "CodecProfile": "HIGH",
+                  "MinIInterval": 0,
+                  "AdaptiveQuantization": "HIGH",
+                  "CodecLevel": "AUTO",
+                  "FieldEncoding": "PAFF",
+                  "SceneChangeDetect": "ENABLED",
+                  "QualityTuningLevel": "SINGLE_PASS_HQ",
+                  "UnregisteredSeiTimecode": "DISABLED",
+                  "GopSizeUnits": "SECONDS",
+                  "NumberBFramesBetweenReferenceFrames": 3,
+                  "RepeatPps": "DISABLED",
+                  "DynamicSubGop": "ADAPTIVE"
                 }
               },
               "AfdSignaling": "NONE",

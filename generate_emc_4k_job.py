@@ -40,13 +40,6 @@ class CodecAwsName(Enum):
     AV1 = "AV1"
 
 
-class RateControlMode(Enum):
-    VP9 = "VBR"
-    HEVC = "QVBR"
-    AVC = "QVBR"
-    AV1 = "QVBR"
-
-
 def generate_image_insertion(codec: Codec, framesize):
     return {
         "ImageInserter": {
@@ -66,16 +59,19 @@ def generate_image_insertion(codec: Codec, framesize):
 # TODO fill out the rest of the codec settings
 def generate_codec_settings_block(codec: Codec, framesize):
     qvbr_quality_level = 9 if framesize < 720 else 4
+    max_bitrate = vbr_bitrate_values[framesize][1]
+    bitrate = vbr_bitrate_values[framesize][0]
+
     if codec == Codec.VP9:
         return {
             "Vp9Settings": {
                 "RateControlMode": "VBR",
-                "MaxBitrate": math.floor(int(vbr_bitrate_values[framesize][1]) / 2),
-                "Bitrate": math.floor(int(vbr_bitrate_values[framesize][0]) / 2),
+                "MaxBitrate": math.floor(max_bitrate / 2),
+                "Bitrate": math.floor(bitrate / 2),
             }
         }
     elif codec == Codec.HEVC:
-        max_bitrate_hevc = math.floor(int(vbr_bitrate_values[framesize][1]) / 2)
+        max_bitrate_hevc = math.floor(int(max_bitrate) / 2)
         return {
             "H265Settings": {
                 "InterlaceMode": "PROGRESSIVE",
@@ -86,12 +82,12 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "GopSize": 3,
                 "Slices": 4 if framesize < 720 else 2,
                 "GopBReference": "ENABLED",
-                "HrdBufferSize": max_bitrate_hevc * 2,  # Todo vary this
+                "HrdBufferSize": max_bitrate_hevc * 2,
                 "MaxBitrate": max_bitrate_hevc,
                 "SpatialAdaptiveQuantization": "ENABLED",
                 "TemporalAdaptiveQuantization": "ENABLED",
                 "FlickerAdaptiveQuantization": "ENABLED",
-                "RateControlMode": RateControlMode[Codec(codec).value].value,
+                "RateControlMode": "QVBR",
                 "QvbrSettings": {
                     "QvbrQualityLevel": qvbr_quality_level,
                 },
@@ -115,22 +111,51 @@ def generate_codec_settings_block(codec: Codec, framesize):
     elif codec == Codec.AVC:
         return {
             "H264Settings": {
-                "MaxBitrate": vbr_bitrate_values[framesize][1],
-                "RateControlMode": RateControlMode[Codec(codec).value].value,
+                "InterlaceMode": "PROGRESSIVE",
+                "NumberReferenceFrames": 3,
+                "Syntax": "DEFAULT",
+                "GopClosedCadence": 1,
+                "HrdBufferInitialFillPercentage": 90,
+                "GopSize": 3,
+                "Slices": 4,
+                "GopBReference": "ENABLED",
+                "HrdBufferSize": max_bitrate * 2,
+                "MaxBitrate": max_bitrate,
+                "SpatialAdaptiveQuantization": "ENABLED",
+                "TemporalAdaptiveQuantization": "ENABLED",
+                "FlickerAdaptiveQuantization": "ENABLED",
+                "EntropyEncoding": "CABAC",
+                "RateControlMode": "QVBR",
                 "QvbrSettings": {
                     "QvbrQualityLevel": qvbr_quality_level,
                 },
-                "SceneChangeDetect": "TRANSITION_DETECTION",
+                "CodecProfile": "HIGH",
+                "MinIInterval": 0,
+                "AdaptiveQuantization": "HIGH",
+                "CodecLevel": "AUTO",
+                "FieldEncoding": "PAFF",
+                "SceneChangeDetect": "ENABLED",
+                "QualityTuningLevel": "SINGLE_PASS_HQ",
+                "UnregisteredSeiTimecode": "DISABLED",
+                "GopSizeUnits": "SECONDS",
+                "NumberBFramesBetweenReferenceFrames": 3,
+                "RepeatPps": "DISABLED",
+                "DynamicSubGop": "ADAPTIVE",
             }
         }
     elif codec == Codec.AV1:
         return {
             "Av1Settings": {
-                "RateControlMode": RateControlMode[Codec(codec).value].value,
+                "GopSize": 129,
+                "NumberBFramesBetweenReferenceFrames": 15,
+                "Slices": 1,
+                "RateControlMode": "QVBR",
                 "QvbrSettings": {
-                    "QvbrQualityLevel": qvbr_quality_level,
+                    "QvbrQualityLevel": 7 if framesize < 720 else 4,
                 },
-                "MaxBitrate": vbr_bitrate_values[framesize][1],
+                "MaxBitrate": max_bitrate,
+                "AdaptiveQuantization": "MEDIUM",
+                "SpatialAdaptiveQuantization": "ENABLED",
             }
         }
 
