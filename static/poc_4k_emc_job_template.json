@@ -38,14 +38,14 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
-                  "GopSize": 129,
+                  "GopSize": 90,
                   "NumberBFramesBetweenReferenceFrames": 15,
-                  "Slices": 1,
+                  "Slices": 3,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 12000000,
+                  "MaxBitrate": 6000000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -84,14 +84,14 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
-                  "GopSize": 129,
+                  "GopSize": 90,
                   "NumberBFramesBetweenReferenceFrames": 15,
-                  "Slices": 1,
+                  "Slices": 3,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 12000000,
+                  "MaxBitrate": 6000000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -130,14 +130,14 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
-                  "GopSize": 129,
+                  "GopSize": 90,
                   "NumberBFramesBetweenReferenceFrames": 15,
-                  "Slices": 1,
+                  "Slices": 3,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 10000000,
+                  "MaxBitrate": 5000000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -176,14 +176,14 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
-                  "GopSize": 129,
+                  "GopSize": 90,
                   "NumberBFramesBetweenReferenceFrames": 15,
-                  "Slices": 1,
+                  "Slices": 3,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 7000000,
+                  "MaxBitrate": 3500000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -222,14 +222,14 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
-                  "GopSize": 129,
+                  "GopSize": 90,
                   "NumberBFramesBetweenReferenceFrames": 15,
-                  "Slices": 1,
+                  "Slices": 3,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 4
                   },
-                  "MaxBitrate": 4500000,
+                  "MaxBitrate": 2250000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -268,14 +268,14 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
-                  "GopSize": 129,
+                  "GopSize": 90,
                   "NumberBFramesBetweenReferenceFrames": 15,
-                  "Slices": 1,
+                  "Slices": 3,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 7
                   },
-                  "MaxBitrate": 1100000,
+                  "MaxBitrate": 550000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -314,14 +314,14 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
-                  "GopSize": 129,
+                  "GopSize": 90,
                   "NumberBFramesBetweenReferenceFrames": 15,
-                  "Slices": 1,
+                  "Slices": 3,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 7
                   },
-                  "MaxBitrate": 800000,
+                  "MaxBitrate": 400000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -360,14 +360,14 @@
               "CodecSettings": {
                 "Codec": "AV1",
                 "Av1Settings": {
-                  "GopSize": 129,
+                  "GopSize": 90,
                   "NumberBFramesBetweenReferenceFrames": 15,
-                  "Slices": 1,
+                  "Slices": 3,
                   "RateControlMode": "QVBR",
                   "QvbrSettings": {
                     "QvbrQualityLevel": 7
                   },
-                  "MaxBitrate": 400000,
+                  "MaxBitrate": 200000,
                   "AdaptiveQuantization": "MEDIUM",
                   "SpatialAdaptiveQuantization": "ENABLED"
                 }
@@ -690,542 +690,6 @@
               "ColorMetadata": "INSERT"
             },
             "NameModifier": "-vp9-234"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 3840,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 2160,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-2160p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "GopClosedCadence": 1,
-                  "AlternateTransferFunctionSei": "DISABLED",
-                  "HrdBufferInitialFillPercentage": 90,
-                  "GopSize": 3,
-                  "Slices": 2,
-                  "GopBReference": "ENABLED",
-                  "HrdBufferSize": 12000000,
-                  "MaxBitrate": 6000000,
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "ENABLED",
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 4
-                  },
-                  "CodecProfile": "MAIN_MAIN",
-                  "Tiles": "ENABLED",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS_HQ",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "SECONDS",
-                  "NumberBFramesBetweenReferenceFrames": 3,
-                  "TemporalIds": "DISABLED",
-                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                  "WriteMp4PackagingType": "HVC1",
-                  "DynamicSubGop": "ADAPTIVE"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-2160"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 2560,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 1440,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-1440p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "GopClosedCadence": 1,
-                  "AlternateTransferFunctionSei": "DISABLED",
-                  "HrdBufferInitialFillPercentage": 90,
-                  "GopSize": 3,
-                  "Slices": 2,
-                  "GopBReference": "ENABLED",
-                  "HrdBufferSize": 12000000,
-                  "MaxBitrate": 6000000,
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "ENABLED",
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 4
-                  },
-                  "CodecProfile": "MAIN_MAIN",
-                  "Tiles": "ENABLED",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS_HQ",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "SECONDS",
-                  "NumberBFramesBetweenReferenceFrames": 3,
-                  "TemporalIds": "DISABLED",
-                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                  "WriteMp4PackagingType": "HVC1",
-                  "DynamicSubGop": "ADAPTIVE"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-1440"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 1920,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 1080,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-1080p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "GopClosedCadence": 1,
-                  "AlternateTransferFunctionSei": "DISABLED",
-                  "HrdBufferInitialFillPercentage": 90,
-                  "GopSize": 3,
-                  "Slices": 2,
-                  "GopBReference": "ENABLED",
-                  "HrdBufferSize": 10000000,
-                  "MaxBitrate": 5000000,
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "ENABLED",
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 4
-                  },
-                  "CodecProfile": "MAIN_MAIN",
-                  "Tiles": "ENABLED",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS_HQ",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "SECONDS",
-                  "NumberBFramesBetweenReferenceFrames": 3,
-                  "TemporalIds": "DISABLED",
-                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                  "WriteMp4PackagingType": "HVC1",
-                  "DynamicSubGop": "ADAPTIVE"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-1080"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 1706,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 960,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-960p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "GopClosedCadence": 1,
-                  "AlternateTransferFunctionSei": "DISABLED",
-                  "HrdBufferInitialFillPercentage": 90,
-                  "GopSize": 3,
-                  "Slices": 2,
-                  "GopBReference": "ENABLED",
-                  "HrdBufferSize": 7000000,
-                  "MaxBitrate": 3500000,
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "ENABLED",
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 4
-                  },
-                  "CodecProfile": "MAIN_MAIN",
-                  "Tiles": "ENABLED",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS_HQ",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "SECONDS",
-                  "NumberBFramesBetweenReferenceFrames": 3,
-                  "TemporalIds": "DISABLED",
-                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                  "WriteMp4PackagingType": "HVC1",
-                  "DynamicSubGop": "ADAPTIVE"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-960"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 1280,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 720,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-720p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "GopClosedCadence": 1,
-                  "AlternateTransferFunctionSei": "DISABLED",
-                  "HrdBufferInitialFillPercentage": 90,
-                  "GopSize": 3,
-                  "Slices": 2,
-                  "GopBReference": "ENABLED",
-                  "HrdBufferSize": 4500000,
-                  "MaxBitrate": 2250000,
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "ENABLED",
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 4
-                  },
-                  "CodecProfile": "MAIN_MAIN",
-                  "Tiles": "ENABLED",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS_HQ",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "SECONDS",
-                  "NumberBFramesBetweenReferenceFrames": 3,
-                  "TemporalIds": "DISABLED",
-                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                  "WriteMp4PackagingType": "HVC1",
-                  "DynamicSubGop": "ADAPTIVE"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-720"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 768,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 432,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-432p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "GopClosedCadence": 1,
-                  "AlternateTransferFunctionSei": "DISABLED",
-                  "HrdBufferInitialFillPercentage": 90,
-                  "GopSize": 3,
-                  "Slices": 4,
-                  "GopBReference": "ENABLED",
-                  "HrdBufferSize": 1100000,
-                  "MaxBitrate": 550000,
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "ENABLED",
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "CodecProfile": "MAIN_MAIN",
-                  "Tiles": "ENABLED",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS_HQ",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "SECONDS",
-                  "NumberBFramesBetweenReferenceFrames": 3,
-                  "TemporalIds": "DISABLED",
-                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                  "WriteMp4PackagingType": "HVC1",
-                  "DynamicSubGop": "ADAPTIVE"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-432"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 640,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 360,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-360p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "GopClosedCadence": 1,
-                  "AlternateTransferFunctionSei": "DISABLED",
-                  "HrdBufferInitialFillPercentage": 90,
-                  "GopSize": 3,
-                  "Slices": 4,
-                  "GopBReference": "ENABLED",
-                  "HrdBufferSize": 800000,
-                  "MaxBitrate": 400000,
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "ENABLED",
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "CodecProfile": "MAIN_MAIN",
-                  "Tiles": "ENABLED",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS_HQ",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "SECONDS",
-                  "NumberBFramesBetweenReferenceFrames": 3,
-                  "TemporalIds": "DISABLED",
-                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                  "WriteMp4PackagingType": "HVC1",
-                  "DynamicSubGop": "ADAPTIVE"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-360"
-          },
-          {
-            "ContainerSettings": {
-              "Container": "CMFC"
-            },
-            "VideoDescription": {
-              "Width": 416,
-              "ScalingBehavior": "DEFAULT",
-              "Height": 234,
-              "VideoPreprocessors": {
-                "ImageInserter": {
-                  "InsertableImages": [
-                    {
-                      "ImageX": 0,
-                      "ImageY": 0,
-                      "Layer": 2,
-                      "ImageInserterInput": "https://static.drm.pbs.org/poc-4k-test/framesizebadges/hevc-234p.png",
-                      "Opacity": 50
-                    }
-                  ]
-                }
-              },
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 100,
-              "CodecSettings": {
-                "Codec": "H_265",
-                "H265Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "GopClosedCadence": 1,
-                  "AlternateTransferFunctionSei": "DISABLED",
-                  "HrdBufferInitialFillPercentage": 90,
-                  "GopSize": 3,
-                  "Slices": 4,
-                  "GopBReference": "ENABLED",
-                  "HrdBufferSize": 400000,
-                  "MaxBitrate": 200000,
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "ENABLED",
-                  "RateControlMode": "QVBR",
-                  "QvbrSettings": {
-                    "QvbrQualityLevel": 9
-                  },
-                  "CodecProfile": "MAIN_MAIN",
-                  "Tiles": "ENABLED",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS_HQ",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "SECONDS",
-                  "NumberBFramesBetweenReferenceFrames": 3,
-                  "TemporalIds": "DISABLED",
-                  "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                  "WriteMp4PackagingType": "HVC1",
-                  "DynamicSubGop": "ADAPTIVE"
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "NameModifier": "-hevc-234"
           },
           {
             "ContainerSettings": {

@@ -71,7 +71,7 @@ def generate_codec_settings_block(codec: Codec, framesize):
             }
         }
     elif codec == Codec.HEVC:
-        max_bitrate_hevc = math.floor(int(max_bitrate) / 2)
+        max_bitrate_hevc = math.floor(max_bitrate / 2)
         return {
             "H265Settings": {
                 "InterlaceMode": "PROGRESSIVE",
@@ -146,14 +146,14 @@ def generate_codec_settings_block(codec: Codec, framesize):
     elif codec == Codec.AV1:
         return {
             "Av1Settings": {
-                "GopSize": 129,
+                "GopSize": 90,
                 "NumberBFramesBetweenReferenceFrames": 15,
-                "Slices": 1,
+                "Slices": 3,
                 "RateControlMode": "QVBR",
                 "QvbrSettings": {
                     "QvbrQualityLevel": 7 if framesize < 720 else 4,
                 },
-                "MaxBitrate": max_bitrate,
+                "MaxBitrate": math.floor(max_bitrate / 2),
                 "AdaptiveQuantization": "MEDIUM",
                 "SpatialAdaptiveQuantization": "ENABLED",
             }
@@ -212,7 +212,7 @@ job_details = {
                     codecs=[
                         Codec.AV1,
                         Codec.VP9,
-                        Codec.HEVC,
+                        # Codec.HEVC,
                         Codec.AVC,
                     ],
                     framesizes=FRAMESIZES,
