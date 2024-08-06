@@ -111,7 +111,7 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "Tiles": "ENABLED",
                 "MinIInterval": 0,
                 "AdaptiveQuantization": "HIGH",
-                "CodecLevel": "AUTO",
+                "CodecLevel": "5.1",
                 "SceneChangeDetect": "ENABLED",
                 "QualityTuningLevel": "SINGLE_PASS_HQ",
                 "UnregisteredSeiTimecode": "DISABLED",
