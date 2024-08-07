@@ -2,6 +2,8 @@ import json
 import math
 from enum import Enum
 
+ASCENDING_LADDER = True
+
 
 class Codec(Enum):
     VP9 = "VP9"
@@ -35,6 +37,10 @@ FRAMESIZES = [
     # 360,
     234,
 ]
+
+if ASCENDING_LADDER:
+    FRAMESIZES.reverse()
+
 
 # framesize: (bitrate, max_bitrate)
 vbr_bitrate_values = {
@@ -111,7 +117,7 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "Tiles": "ENABLED",
                 "MinIInterval": 0,
                 "AdaptiveQuantization": "HIGH",
-                "CodecLevel": "5.1",
+                "CodecLevel": "LEVEL_5_1",
                 "SceneChangeDetect": "ENABLED",
                 "QualityTuningLevel": "SINGLE_PASS_HQ",
                 "UnregisteredSeiTimecode": "DISABLED",
@@ -178,8 +184,8 @@ def generate_codec_settings_block(codec: Codec, framesize):
 
 def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
     video_outputs = []
-    for codec in codecs:
-        for framesize in framesizes:
+    for framesize in framesizes:
+        for codec in codecs:
             framewidth = math.floor(int(framesize / 9 * 16))
             frameheight = framesize
 
@@ -264,6 +270,10 @@ jobs_to_generate = [
             "AVC",
             "AV1",
         ],
+    },
+    {
+        "job_name": "Tst4k_AVC_HEVC_VP9_AV1_1",
+        "codecs_to_use": ["AVC", "HEVC", "VP9", "AV1"],
     },
 ]
 for job in jobs_to_generate:
