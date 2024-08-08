@@ -29,7 +29,7 @@ MEDIACONVERT_ROLE_ARN = (
 # The list of framesizes to produce outputs for, ordered by preference
 FRAMESIZES = [
     2160,
-    1440,
+    # 1440,
     1080,
     # 960,
     720,
@@ -42,6 +42,11 @@ if ASCENDING_LADDER:
     FRAMESIZES.reverse()
 
 
+def calculate_vp9_max_bitrate(target_bitrate: int) -> int:
+    # https://developers.google.com/media/vp9/settings/vod
+    return math.floor(target_bitrate * 1.45)
+
+
 # framesize: (bitrate, max_bitrate)
 vbr_bitrate_values = {
     2160: (10000000, 12000000),
@@ -52,6 +57,18 @@ vbr_bitrate_values = {
     432: (900000, 1100000),
     360: (600000, 800000),
     234: (200000, 400000),
+}
+
+# we should varu the max bitrate calculation so it is closer to 1.1-1.2% of the target bitrate when <= 720p and 1.45% when > 720p
+vp9_bitrate_values = {
+    2160: (12000000, calculate_vp9_max_bitrate(12000000)),
+    1440: (6000000, calculate_vp9_max_bitrate(6000000)),
+    1080: (1800000, calculate_vp9_max_bitrate(1800000)),
+    960: (1800000, calculate_vp9_max_bitrate(1800000)),
+    720: (1024000, calculate_vp9_max_bitrate(1024000)),
+    432: (750000, calculate_vp9_max_bitrate(750000)),
+    360: (276000, calculate_vp9_max_bitrate(276000)),
+    234: (150000, calculate_vp9_max_bitrate(150000)),
 }
 
 
@@ -85,11 +102,14 @@ def generate_codec_settings_block(codec: Codec, framesize):
     bitrate = vbr_bitrate_values[framesize][0]
 
     if codec == Codec.VP9:
+        max_bitrate = vp9_bitrate_values[framesize][1]
+        bitrate = vp9_bitrate_values[framesize][0]
         return {
             "Vp9Settings": {
                 "RateControlMode": "VBR",
-                "MaxBitrate": math.floor(max_bitrate / 2),
-                "Bitrate": math.floor(bitrate / 2),
+                "MaxBitrate": max_bitrate,
+                "Bitrate": bitrate,
+                "QualityTuningLevel": "MULTI_PASS_HQ",
             }
         }
     elif codec == Codec.HEVC:
@@ -247,44 +267,26 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
 
 
 jobs_to_generate = [
-    {"job_name": "Tst4k_AVC_1", "codecs_to_use": ["AVC"]},
     {
-        "job_name": "Tst4k_AVC_HEVC_1",
-        "codecs_to_use": [
-            "AVC",
-            "HEVC",
-        ],
-    },
-    {
-        "job_name": "Tst4k_AVC_VP9_1",
+        "job_name": "Tst4k_AVC_VP9_HEVC_1",
         "codecs_to_use": [
             "AVC",
             "VP9",
+            "HEVC",
         ],
-    },
-    {"job_name": "Tst4k_AVC_HEVC_VP9_1", "codecs_to_use": ["AVC", "HEVC", "VP9"]},
-    {"job_name": "Tst4k_AVC_VP9_AV1_1", "codecs_to_use": ["AVC", "VP9", "AV1"]},
-    {
-        "job_name": "Tst4k_AVC_AV1_1",
-        "codecs_to_use": [
-            "AVC",
-            "AV1",
-        ],
-    },
-    {
-        "job_name": "Tst4k_AVC_HEVC_VP9_AV1_1",
-        "codecs_to_use": ["AVC", "HEVC", "VP9", "AV1"],
     },
 ]
 for job in jobs_to_generate:
     job_name = job["job_name"]
 
-    # S3_VIDEO_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.mp4"
-    # S3_CAPTION_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.scc"
-    S3_VIDEO_FILE_URI = (
-        "https://s3.amazonaws.com/pbs.cove.videos.tp.prod/e2e_tests/pbs.mp4"
+    S3_VIDEO_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.mp4"
+    S3_CAPTION_FILE_URI = (
+        "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.scc"
     )
-    S3_CAPTION_FILE_URI = "https://s3.amazonaws.com/pbs.cove.videos.tp.prod/captions/nova/e986b865-66cd-4959-94fe-dea90dd4eda0/captions/2000195662_Original.scc"
+    # S3_VIDEO_FILE_URI = (
+    #     "https://s3.amazonaws.com/pbs.cove.videos.tp.prod/e2e_tests/pbs.mp4"
+    # )
+    # S3_CAPTION_FILE_URI = "https://s3.amazonaws.com/pbs.cove.videos.tp.prod/captions/nova/e986b865-66cd-4959-94fe-dea90dd4eda0/captions/2000195662_Original.scc"
 
     # The list of codecs to produce outputs for, ordered by preference
     # CODECS = [
@@ -335,13 +337,13 @@ for job in jobs_to_generate:
             "FollowSource": 1,
             "Inputs": [
                 {
-                    # "InputClippings": [
-                    #     # ! DEBUG ONLY only use a small clip to speed up testing
-                    #     {
-                    #         "EndTimecode": "00:24:00:00",
-                    #         "StartTimecode": "00:23:00:00",
-                    #     }
-                    # ],
+                    "InputClippings": [
+                        # ! DEBUG ONLY only use a small clip to speed up testing
+                        {
+                            "EndTimecode": "00:24:00:00",
+                            "StartTimecode": "00:23:00:00",
+                        }
+                    ],
                     "AudioSelectors": {
                         "Audio Selector 1": {
                             "DefaultSelection": "DEFAULT",
