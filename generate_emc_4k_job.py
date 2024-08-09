@@ -2,7 +2,34 @@ import json
 import math
 from enum import Enum
 
-ASCENDING_LADDER = True
+# ASCENDING_LADDER = False
+
+# The list of framesizes to produce outputs for, ordered by preference
+FRAMESIZES = [
+    720,
+    2160,
+    1440,
+    1080,
+    # 960,
+    432,
+    # 360,
+    234,
+]
+
+# if ASCENDING_LADDER:
+#     FRAMESIZES.reverse()
+
+
+jobs_to_generate = [
+    {
+        "job_name": "Tst4k_HEVC_VP9_AVC_2",
+        "codecs_to_use": [
+            "HEVC",
+            "VP9",
+            "AVC",
+        ],
+    },
+]
 
 
 class Codec(Enum):
@@ -26,32 +53,17 @@ MEDIACONVERT_ROLE_ARN = (
 )
 
 
-# The list of framesizes to produce outputs for, ordered by preference
-FRAMESIZES = [
-    2160,
-    # 1440,
-    1080,
-    # 960,
-    720,
-    432,
-    # 360,
-    234,
-]
-
-if ASCENDING_LADDER:
-    FRAMESIZES.reverse()
-
-
 def calculate_vp9_max_bitrate(target_bitrate: int) -> int:
+
     # https://developers.google.com/media/vp9/settings/vod
     return math.floor(target_bitrate * 1.45)
 
 
 # framesize: (bitrate, max_bitrate)
 vbr_bitrate_values = {
-    2160: (10000000, 12000000),
-    1440: (10000000, 12000000),
-    1080: (8000000, 10000000),
+    2160: (8000000, 14000000),
+    1440: (4000000, 8000000),
+    1080: (4000000, 8000000),
     960: (5000000, 7000000),
     720: (2500000, 4500000),
     432: (900000, 1100000),
@@ -59,7 +71,7 @@ vbr_bitrate_values = {
     234: (200000, 400000),
 }
 
-# we should varu the max bitrate calculation so it is closer to 1.1-1.2% of the target bitrate when <= 720p and 1.45% when > 720p
+
 vp9_bitrate_values = {
     2160: (12000000, calculate_vp9_max_bitrate(12000000)),
     1440: (6000000, calculate_vp9_max_bitrate(6000000)),
@@ -97,18 +109,21 @@ def generate_image_insertion(codec: Codec, framesize):
 
 
 def generate_codec_settings_block(codec: Codec, framesize):
-    qvbr_quality_level = 9 if framesize < 720 else 4
+    if framesize < 720:
+        qvbr_quality_level = 4
+    elif framesize >= 720 and framesize <= 1080:
+        qvbr_quality_level = 7
+    elif framesize > 1080:
+        qvbr_quality_level = 9
+
     max_bitrate = vbr_bitrate_values[framesize][1]
-    bitrate = vbr_bitrate_values[framesize][0]
 
     if codec == Codec.VP9:
-        max_bitrate = vp9_bitrate_values[framesize][1]
-        bitrate = vp9_bitrate_values[framesize][0]
         return {
             "Vp9Settings": {
                 "RateControlMode": "VBR",
-                "MaxBitrate": max_bitrate,
-                "Bitrate": bitrate,
+                "MaxBitrate": vp9_bitrate_values[framesize][1],
+                "Bitrate": vp9_bitrate_values[framesize][0],
                 "QualityTuningLevel": "MULTI_PASS_HQ",
             }
         }
@@ -139,7 +154,7 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "AdaptiveQuantization": "HIGH",
                 "CodecLevel": "LEVEL_5_1",
                 "SceneChangeDetect": "ENABLED",
-                "QualityTuningLevel": "SINGLE_PASS_HQ",
+                "QualityTuningLevel": "MULTI_PASS_HQ",
                 "UnregisteredSeiTimecode": "DISABLED",
                 "GopSizeUnits": "SECONDS",
                 "NumberBFramesBetweenReferenceFrames": 3,
@@ -151,6 +166,8 @@ def generate_codec_settings_block(codec: Codec, framesize):
         }
 
     elif codec == Codec.AVC:
+        avc_codec_profile = "MAIN" if framesize < 1080 else "HIGH"
+
         return {
             "H264Settings": {
                 "InterlaceMode": "PROGRESSIVE",
@@ -171,13 +188,13 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "QvbrSettings": {
                     "QvbrQualityLevel": qvbr_quality_level,
                 },
-                "CodecProfile": "HIGH",
+                "CodecProfile": avc_codec_profile,
                 "MinIInterval": 0,
                 "AdaptiveQuantization": "HIGH",
                 "CodecLevel": "AUTO",
                 "FieldEncoding": "PAFF",
                 "SceneChangeDetect": "ENABLED",
-                "QualityTuningLevel": "SINGLE_PASS_HQ",
+                "QualityTuningLevel": "MULTI_PASS_HQ",
                 "UnregisteredSeiTimecode": "DISABLED",
                 "GopSizeUnits": "SECONDS",
                 "NumberBFramesBetweenReferenceFrames": 3,
@@ -193,7 +210,7 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "Slices": 4,
                 "RateControlMode": "QVBR",
                 "QvbrSettings": {
-                    "QvbrQualityLevel": 7 if framesize < 720 else 4,
+                    "QvbrQualityLevel": qvbr_quality_level,
                 },
                 "MaxBitrate": math.floor(max_bitrate / 2),
                 "AdaptiveQuantization": "MEDIUM",
@@ -204,8 +221,8 @@ def generate_codec_settings_block(codec: Codec, framesize):
 
 def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
     video_outputs = []
-    for framesize in framesizes:
-        for codec in codecs:
+    for codec in codecs:
+        for framesize in framesizes:
             framewidth = math.floor(int(framesize / 9 * 16))
             frameheight = framesize
 
@@ -266,16 +283,6 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
     return video_outputs
 
 
-jobs_to_generate = [
-    {
-        "job_name": "Tst4k_AVC_VP9_HEVC_1",
-        "codecs_to_use": [
-            "AVC",
-            "VP9",
-            "HEVC",
-        ],
-    },
-]
 for job in jobs_to_generate:
     job_name = job["job_name"]
 
