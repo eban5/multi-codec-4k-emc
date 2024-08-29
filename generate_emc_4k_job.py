@@ -25,7 +25,6 @@ jobs_to_generate = [
     {
         "job_name": "Tst4k_{codecs}_{formatted_datetime}",
         "codecs_to_use": [
-            # "HEVC",
             "VP9",
             "AVC",
         ],
@@ -34,7 +33,6 @@ jobs_to_generate = [
         "job_name": "Tst4k_{codecs}_{formatted_datetime}",
         "codecs_to_use": [
             "HEVC",
-            # "VP9",
             "AVC",
         ],
     },
@@ -318,19 +316,25 @@ def report_bitrate_ladder(video_outputs: list[dict]):
         print(f"{name_modifier}\t{target_bitrate}\t{max_bitrate}")
 
 
-for job in jobs_to_generate:
+def generate_job_name(name: str, codecs: list[str]):
     # Get the current datetime and format it as yyyyMMdd_HHmmSS
     current_datetime = datetime.now()
     formatted_datetime = current_datetime.strftime("%Y%m%d_%H%M%S")
 
     # Update the job_name field dynamically
     # Concatenate the codecs into a single string separated by an underscore
-    codecs_str = "_".join(job["codecs_to_use"])
+    codecs_str = "_".join(codecs)
+
+    return name.format(codecs=codecs_str, formatted_datetime=formatted_datetime)
+
+
+for job in jobs_to_generate:
 
     # Update the job_name with the dynamic codecs and datetime
-    job["job_name"] = job["job_name"].format(
-        codecs=codecs_str, formatted_datetime=formatted_datetime
+    job["job_name"] = generate_job_name(
+        name=job["job_name"], codecs=job["codecs_to_use"]
     )
+
     print(f"'------------------\nGenerating job for", job["job_name"])
     print("codec\t\ttarget bitrate\tmax bitrate")
 
@@ -343,13 +347,6 @@ for job in jobs_to_generate:
     # )
     # S3_CAPTION_FILE_URI = "https://s3.amazonaws.com/pbs.cove.videos.tp.prod/captions/nova/e986b865-66cd-4959-94fe-dea90dd4eda0/captions/2000195662_Original.scc"
 
-    # The list of codecs to produce outputs for, ordered by preference
-    # CODECS = [
-    #     Codec.AV1,
-    #     Codec.VP9,
-    #     Codec.HEVC,
-    #     Codec.AVC,
-    # ]
     CODECS = [Codec[codec] for codec in job["codecs_to_use"]]
 
     video_outputs = generate_video_outputs(
