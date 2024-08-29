@@ -1,2 +1,4 @@
 venv/
 static/
+report*.html
+report*.json

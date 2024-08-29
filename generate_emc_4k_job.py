@@ -375,6 +375,11 @@ for job in jobs_to_generate:
                 "LanguageCodeControl": "FOLLOW_INPUT",
                 "AudioType": 0,
                 "LanguageCode": "ENG",
+                "StreamName": "English",
+                "AudioNormalizationSettings": {
+                    "Algorithm": "ITU_BS_1770_3",
+                    "TargetLkfs": -23,
+                },
             }
         ],
         "ContainerSettings": {"Container": "CMFC"},
@@ -447,6 +452,8 @@ for job in jobs_to_generate:
                         "Audio Selector 1": {
                             "DefaultSelection": "DEFAULT",
                             "AudioDurationCorrection": "AUTO",
+                            "SelectorType": "LANGUAGE_CODE",
+                            "LanguageCode": "ENG",
                         }
                     },
                     "VideoSelector": {},
