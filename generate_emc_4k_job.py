@@ -1,5 +1,6 @@
 import json
 import math
+from datetime import datetime
 from enum import Enum
 
 # ASCENDING_LADDER = False
@@ -7,7 +8,7 @@ from enum import Enum
 # The list of framesizes to produce outputs for, ordered by preference
 FRAMESIZES = [
     720,
-    2160,
+    # 2160,
     1440,
     1080,
     # 960,
@@ -22,7 +23,23 @@ FRAMESIZES = [
 
 jobs_to_generate = [
     {
-        "job_name": "Tst4k_HEVC_VP9_AVC_2",
+        "job_name": "Tst4k_{codecs}_{formatted_datetime}",
+        "codecs_to_use": [
+            # "HEVC",
+            "VP9",
+            "AVC",
+        ],
+    },
+    {
+        "job_name": "Tst4k_{codecs}_{formatted_datetime}",
+        "codecs_to_use": [
+            "HEVC",
+            # "VP9",
+            "AVC",
+        ],
+    },
+    {
+        "job_name": "Tst4k_{codecs}_{formatted_datetime}",
         "codecs_to_use": [
             "HEVC",
             "VP9",
@@ -30,6 +47,23 @@ jobs_to_generate = [
         ],
     },
 ]
+
+
+# an AI wrote this, and it seems correct to me. blame the machine.
+def bps_to_human_readable(bps):
+    if bps >= 1_000_000:
+        # Convert to Megabits per second
+        value = bps / 1_000_000
+        unit = "Mbps"
+    else:
+        # Convert to Kilobits per second
+        value = bps / 1000
+        unit = "Kbps"
+
+    # Format the result as a string with the appropriate suffix
+    readable_str = f"{value:.2f} {unit}"
+
+    return readable_str
 
 
 class Codec(Enum):
@@ -73,14 +107,14 @@ vbr_bitrate_values = {
 
 
 vp9_bitrate_values = {
-    2160: (12000000, calculate_vp9_max_bitrate(12000000)),
-    1440: (6000000, calculate_vp9_max_bitrate(6000000)),
-    1080: (1800000, calculate_vp9_max_bitrate(1800000)),
-    960: (1800000, calculate_vp9_max_bitrate(1800000)),
+    2160: (1124000, calculate_vp9_max_bitrate(1124000)),
+    1440: (1124000, calculate_vp9_max_bitrate(1124000)),
+    1080: (1124000, calculate_vp9_max_bitrate(1124000)),
+    960: (1024000, calculate_vp9_max_bitrate(1024000)),
     720: (1024000, calculate_vp9_max_bitrate(1024000)),
-    432: (750000, calculate_vp9_max_bitrate(750000)),
+    432: (900000, calculate_vp9_max_bitrate(900000)),
     360: (276000, calculate_vp9_max_bitrate(276000)),
-    234: (150000, calculate_vp9_max_bitrate(150000)),
+    234: (180000, calculate_vp9_max_bitrate(180000)),
 }
 
 
@@ -125,6 +159,7 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "MaxBitrate": vp9_bitrate_values[framesize][1],
                 "Bitrate": vp9_bitrate_values[framesize][0],
                 "QualityTuningLevel": "MULTI_PASS_HQ",
+                # AWS support case 172347295300480. requesting codec levels for VP9.
             }
         }
     elif codec == Codec.HEVC:
@@ -152,7 +187,8 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "Tiles": "ENABLED",
                 "MinIInterval": 0,
                 "AdaptiveQuantization": "HIGH",
-                "CodecLevel": "LEVEL_5_1",
+                # AWS support case 172347295300480. requesting clarification for why 2160 AUTO triggers 6.1 specifically in the output
+                "CodecLevel": "AUTO" if framesize < 2160 else "LEVEL_5",
                 "SceneChangeDetect": "ENABLED",
                 "QualityTuningLevel": "MULTI_PASS_HQ",
                 "UnregisteredSeiTimecode": "DISABLED",
@@ -252,39 +288,51 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
                 }
             )
 
-    # append an audio output
-    video_outputs.append(
-        {
-            "AudioDescriptions": [
-                {
-                    "AudioTypeControl": "FOLLOW_INPUT",
-                    "AudioSourceName": "Audio Selector 1",
-                    "CodecSettings": {
-                        "Codec": "AAC",
-                        "AacSettings": {
-                            "AudioDescriptionBroadcasterMix": "NORMAL",
-                            "Bitrate": 96000,
-                            "RateControlMode": "CBR",
-                            "CodecProfile": "HEV1",
-                            "CodingMode": "CODING_MODE_2_0",
-                            "RawFormat": "NONE",
-                            "SampleRate": 48000,
-                            "Specification": "MPEG4",
-                        },
-                    },
-                    "LanguageCodeControl": "FOLLOW_INPUT",
-                    "AudioType": 0,
-                }
-            ],
-            "ContainerSettings": {"Container": "CMFC"},
-            "NameModifier": "-aac-96k",
-        }
-    )
     return video_outputs
 
 
+def report_bitrate_ladder(video_outputs: list[dict]):
+
+    for video in video_outputs:
+        name_modifier = video["NameModifier"]
+
+        # target_bitrate = "N/A"
+        max_bitrate = "Unknown"
+        codec_settings = video["VideoDescription"]["CodecSettings"]
+        if "Vp9Settings" in codec_settings:
+            target_bitrate = bps_to_human_readable(
+                codec_settings["Vp9Settings"]["Bitrate"]
+            )
+
+            max_bitrate = codec_settings["Vp9Settings"]["MaxBitrate"]
+        elif "H265Settings" in codec_settings:
+            max_bitrate = codec_settings["H265Settings"]["MaxBitrate"]
+            target_bitrate = f"qvbr { codec_settings['H265Settings']['QvbrSettings']['QvbrQualityLevel']}\t"
+
+        elif "H264Settings" in codec_settings:
+            max_bitrate = codec_settings["H264Settings"]["MaxBitrate"]
+            target_bitrate = f"qvbr {codec_settings['H264Settings']['QvbrSettings']['QvbrQualityLevel']}\t"
+
+        max_bitrate = bps_to_human_readable(max_bitrate)
+
+        print(f"{name_modifier}\t{target_bitrate}\t{max_bitrate}")
+
+
 for job in jobs_to_generate:
-    job_name = job["job_name"]
+    # Get the current datetime and format it as yyyyMMdd_HHmmSS
+    current_datetime = datetime.now()
+    formatted_datetime = current_datetime.strftime("%Y%m%d_%H%M%S")
+
+    # Update the job_name field dynamically
+    # Concatenate the codecs into a single string separated by an underscore
+    codecs_str = "_".join(job["codecs_to_use"])
+
+    # Update the job_name with the dynamic codecs and datetime
+    job["job_name"] = job["job_name"].format(
+        codecs=codecs_str, formatted_datetime=formatted_datetime
+    )
+    print(f"'------------------\nGenerating job for", job["job_name"])
+    print("codec\t\ttarget bitrate\tmax bitrate")
 
     S3_VIDEO_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.mp4"
     S3_CAPTION_FILE_URI = (
@@ -304,6 +352,54 @@ for job in jobs_to_generate:
     # ]
     CODECS = [Codec[codec] for codec in job["codecs_to_use"]]
 
+    video_outputs = generate_video_outputs(
+        codecs=CODECS,
+        framesizes=FRAMESIZES,
+    )
+
+    audio_output = {
+        "AudioDescriptions": [
+            {
+                "AudioTypeControl": "FOLLOW_INPUT",
+                "AudioSourceName": "Audio Selector 1",
+                "CodecSettings": {
+                    "Codec": "AAC",
+                    "AacSettings": {
+                        "AudioDescriptionBroadcasterMix": "NORMAL",
+                        "Bitrate": 96000,
+                        "RateControlMode": "CBR",
+                        "CodecProfile": "HEV1",
+                        "CodingMode": "CODING_MODE_2_0",
+                        "RawFormat": "NONE",
+                        "SampleRate": 48000,
+                        "Specification": "MPEG4",
+                    },
+                },
+                "LanguageCodeControl": "FOLLOW_INPUT",
+                "AudioType": 0,
+                "LanguageCode": "ENG",
+            }
+        ],
+        "ContainerSettings": {"Container": "CMFC"},
+        "NameModifier": "-aac-96k",
+    }
+
+    captions_output = {
+        "ContainerSettings": {"Container": "CMFC"},
+        "NameModifier": "-captions",
+        "CaptionDescriptions": [
+            {
+                "CaptionSelectorName": "Captions Selector 1",
+                "DestinationSettings": {
+                    "DestinationType": "WEBVTT",
+                    "WebvttDestinationSettings": {},
+                },
+                "LanguageCode": "ENG",
+                "LanguageDescription": "English CC",
+            }
+        ],
+    }
+
     job_details = {
         "Queue": "arn:aws:mediaconvert:us-east-1:676581116332:queues/Accelerated",
         "UserMetadata": {},
@@ -314,10 +410,7 @@ for job in jobs_to_generate:
                 {
                     "CustomName": "multi-codec",
                     "Name": "CMAF",
-                    "Outputs": generate_video_outputs(
-                        codecs=CODECS,
-                        framesizes=FRAMESIZES,
-                    ),
+                    "Outputs": video_outputs + [audio_output, captions_output],
                     "OutputGroupSettings": {
                         "Type": "CMAF_GROUP_SETTINGS",
                         "CmafGroupSettings": {
@@ -325,7 +418,9 @@ for job in jobs_to_generate:
                             "WriteDashManifest": "DISABLED",
                             "SegmentLength": 6,
                             "MinFinalSegmentLength": 2,
-                            "Destination": create_s3_output_path(job_name=job_name),
+                            "Destination": create_s3_output_path(
+                                job_name=job["job_name"]
+                            ),
                             "DestinationSettings": {
                                 "S3Settings": {
                                     "AccessControl": {
@@ -380,8 +475,12 @@ for job in jobs_to_generate:
     }
 
     # write the json dump to the static directory
-    with open(f"static/{job_name}.json", "w") as f:
+    with open(f"static/{job['job_name']}.json", "w") as f:
         f.write(json.dumps(job_details, indent=2))
+
+    # report to the user the resulting target and max bitrates for each codec
+    report_bitrate_ladder(video_outputs)
+    print("------------------")
 
 
 # https://static.drm.pbs.org/4k/Tst4k_AVC_1/pbs.m3u8
