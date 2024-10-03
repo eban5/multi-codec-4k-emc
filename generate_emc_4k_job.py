@@ -401,16 +401,6 @@ for job in jobs_to_generate:
                     "OutputGroupSettings": {
                         "Type": "CMAF_GROUP_SETTINGS",
                         "CmafGroupSettings": {
-                            # OSCAR VALUES - AUG 19
-                            # "TargetDurationCompatibilityMode": "LEGACY",
-                            # "WriteDashManifest": "ENABLED",
-                            # "SegmentLength": 10,
-                            # "MinFinalSegmentLength": 0,
-                            # "SegmentControl": "SINGLE_FILE",
-                            # "ImageBasedTrickPlay": "NONE",
-                            # "ClientCache": "DISABLED",
-                            # end------- OSCAR VALUES - AUG 19
-                            # start------- POC 4K CMAF Group Settings
                             "TargetDurationCompatibilityMode": "SPEC_COMPLIANT",
                             "WriteDashManifest": "DISABLED",
                             "SegmentLength": 6,
@@ -418,7 +408,6 @@ for job in jobs_to_generate:
                             "SegmentControl": "SEGMENTED_FILES",
                             "ManifestDurationFormat": "FLOATING_POINT",
                             "StreamInfResolution": "INCLUDE",
-                            # end------- POC 4K CMAF Group Settings
                             "Destination": create_s3_output_path(
                                 job_name=job["job_name"]
                             ),
@@ -431,8 +420,6 @@ for job in jobs_to_generate:
                             },
                             "FragmentLength": 2,
                             "CodecSpecification": "RFC_6381",  # default: "RFC_4281"
-                            # "ImageBasedTrickPlay": "NONE",
-                            # "ClientCache": "DISABLED",
                         },
                     },
                 },
