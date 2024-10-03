@@ -8,13 +8,13 @@ from enum import Enum
 # The list of framesizes to produce outputs for, ordered by preference
 FRAMESIZES = [
     720,
-    # 2160,
-    1440,
-    1080,
-    # 960,
-    432,
-    # 360,
     234,
+    # 360,
+    432,
+    # 960,
+    1080,
+    1440,
+    2160,
 ]
 
 # if ASCENDING_LADDER:
@@ -24,26 +24,14 @@ FRAMESIZES = [
 jobs_to_generate = [
     {
         "job_name": "Tst4k_{codecs}_{formatted_datetime}",
-        "codecs_to_use": [
-            "VP9",
-            "AVC",
-        ],
+        "codecs_to_use": ["HEVC", "AVC"],
     },
-    {
-        "job_name": "Tst4k_{codecs}_{formatted_datetime}",
-        "codecs_to_use": [
-            "HEVC",
-            "AVC",
-        ],
-    },
-    {
-        "job_name": "Tst4k_{codecs}_{formatted_datetime}",
-        "codecs_to_use": [
-            "HEVC",
-            "VP9",
-            "AVC",
-        ],
-    },
+    # {
+    #     "job_name": "Tst4k_{codecs}_{formatted_datetime}",
+    #     "codecs_to_use": [
+    #         "VP9",
+    #     ],
+    # },
 ]
 
 
@@ -94,8 +82,8 @@ def calculate_vp9_max_bitrate(target_bitrate: int) -> int:
 # framesize: (bitrate, max_bitrate)
 vbr_bitrate_values = {
     2160: (8000000, 14000000),
-    1440: (4000000, 8000000),
-    1080: (4000000, 8000000),
+    1440: (6000000, 9000000),
+    1080: (4000000, 7500000),
     960: (5000000, 7000000),
     720: (2500000, 4500000),
     432: (900000, 1100000),
@@ -105,8 +93,8 @@ vbr_bitrate_values = {
 
 
 vp9_bitrate_values = {
-    2160: (1124000, calculate_vp9_max_bitrate(1124000)),
-    1440: (1124000, calculate_vp9_max_bitrate(1124000)),
+    2160: (5000000, calculate_vp9_max_bitrate(5000000)),
+    1440: (4096000, calculate_vp9_max_bitrate(4096000)),
     1080: (1124000, calculate_vp9_max_bitrate(1124000)),
     960: (1024000, calculate_vp9_max_bitrate(1024000)),
     720: (1024000, calculate_vp9_max_bitrate(1024000)),
@@ -154,8 +142,8 @@ def generate_codec_settings_block(codec: Codec, framesize):
         return {
             "Vp9Settings": {
                 "RateControlMode": "VBR",
-                "MaxBitrate": vp9_bitrate_values[framesize][1],
-                "Bitrate": vp9_bitrate_values[framesize][0],
+                "MaxBitrate": math.floor(vbr_bitrate_values[framesize][1] / 2),
+                "Bitrate": math.floor(vbr_bitrate_values[framesize][0] / 2),
                 "QualityTuningLevel": "MULTI_PASS_HQ",
                 # AWS support case 172347295300480. requesting codec levels for VP9.
             }
@@ -255,8 +243,12 @@ def generate_codec_settings_block(codec: Codec, framesize):
 
 def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
     video_outputs = []
-    for codec in codecs:
-        for framesize in framesizes:
+    for framesize in framesizes:
+        for codec in codecs:
+            # skip 1440p and 2160p for AVC
+            if Codec(codec) == Codec.AVC and framesize in [1440, 2160]:
+                continue
+
             framewidth = math.floor(int(framesize / 9 * 16))
             frameheight = framesize
 
@@ -363,7 +355,7 @@ for job in jobs_to_generate:
                     "Codec": "AAC",
                     "AacSettings": {
                         "AudioDescriptionBroadcasterMix": "NORMAL",
-                        "Bitrate": 96000,
+                        "Bitrate": 128000,
                         "RateControlMode": "CBR",
                         "CodecProfile": "HEV1",
                         "CodingMode": "CODING_MODE_2_0",
@@ -383,7 +375,7 @@ for job in jobs_to_generate:
             }
         ],
         "ContainerSettings": {"Container": "CMFC"},
-        "NameModifier": "-aac-96k",
+        "NameModifier": "-aac-128k",
     }
 
     captions_output = {
@@ -397,7 +389,7 @@ for job in jobs_to_generate:
                     "WebvttDestinationSettings": {},
                 },
                 "LanguageCode": "ENG",
-                "LanguageDescription": "English CC",
+                "LanguageDescription": "English",
             }
         ],
     }
@@ -416,10 +408,24 @@ for job in jobs_to_generate:
                     "OutputGroupSettings": {
                         "Type": "CMAF_GROUP_SETTINGS",
                         "CmafGroupSettings": {
+                            # OSCAR VALUES - AUG 19
+                            # "TargetDurationCompatibilityMode": "LEGACY",
+                            # "WriteDashManifest": "ENABLED",
+                            # "SegmentLength": 10,
+                            # "MinFinalSegmentLength": 0,
+                            # "SegmentControl": "SINGLE_FILE",
+                            # "ImageBasedTrickPlay": "NONE",
+                            # "ClientCache": "DISABLED",
+                            # end------- OSCAR VALUES - AUG 19
+                            # start------- POC 4K CMAF Group Settings
                             "TargetDurationCompatibilityMode": "SPEC_COMPLIANT",
                             "WriteDashManifest": "DISABLED",
                             "SegmentLength": 6,
                             "MinFinalSegmentLength": 2,
+                            "SegmentControl": "SEGMENTED_FILES",
+                            "ManifestDurationFormat": "FLOATING_POINT",
+                            "StreamInfResolution": "INCLUDE",
+                            # end------- POC 4K CMAF Group Settings
                             "Destination": create_s3_output_path(
                                 job_name=job["job_name"]
                             ),
@@ -431,9 +437,9 @@ for job in jobs_to_generate:
                                 }
                             },
                             "FragmentLength": 2,
-                            "SegmentControl": "SEGMENTED_FILES",
-                            "ManifestDurationFormat": "FLOATING_POINT",
-                            "CodecSpecification": "RFC_6381",
+                            "CodecSpecification": "RFC_6381",  # default: "RFC_4281"
+                            # "ImageBasedTrickPlay": "NONE",
+                            # "ClientCache": "DISABLED",
                         },
                     },
                 },
@@ -444,8 +450,8 @@ for job in jobs_to_generate:
                     "InputClippings": [
                         # ! DEBUG ONLY only use a small clip to speed up testing
                         {
-                            "EndTimecode": "00:24:00:00",
-                            "StartTimecode": "00:23:00:00",
+                            "EndTimecode": "00:32:50:00",
+                            "StartTimecode": "00:28:50:00",
                         }
                     ],
                     "AudioSelectors": {
