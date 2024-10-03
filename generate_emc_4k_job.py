@@ -3,6 +3,16 @@ import math
 from datetime import datetime
 from enum import Enum
 
+with open("env.json") as config_file:
+    config = json.load(config_file)
+
+S3_FRAMESIZE_BADGE_PATH = config["S3_FRAMESIZE_BADGE_PATH"]
+MEDIACONVERT_QUEUE_ARN = config["MEDIACONVERT_QUEUE_ARN"]
+MEDIACONVERT_ROLE_ARN = config["MEDIACONVERT_ROLE_ARN"]
+S3_DESTINATION_PATH = config["S3_DESTINATION_PATH"]
+S3_VIDEO_FILE_URI = config["S3_VIDEO_FILE_URI"]
+S3_CAPTION_FILE_URI = config["S3_CAPTION_FILE_URI"]
+
 # ASCENDING_LADDER = False
 
 # The list of framesizes to produce outputs for, ordered by preference
@@ -67,12 +77,6 @@ class CodecAwsName(Enum):
     AV1 = "AV1"
 
 
-S3_FRAMESIZE_BADGE_PATH = "https://static.drm.pbs.org/poc-4k-test/framesizebadges/"
-MEDIACONVERT_ROLE_ARN = (
-    "arn:aws:iam::676581116332:role/service-role/MediaConvert_Default_Role"
-)
-
-
 def calculate_vp9_max_bitrate(target_bitrate: int) -> int:
 
     # https://developers.google.com/media/vp9/settings/vod
@@ -109,7 +113,7 @@ def create_s3_output_path(job_name: str):
         output_dir = "multicodec10"
     else:
         output_dir = job_name
-    return f"s3://pbs-video-dev/4k/{output_dir}/$fn$"
+    return f"s3://{S3_DESTINATION_PATH}{output_dir}/$fn$"
 
 
 def generate_image_insertion(codec: Codec, framesize):
@@ -145,7 +149,6 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "MaxBitrate": math.floor(vbr_bitrate_values[framesize][1] / 2),
                 "Bitrate": math.floor(vbr_bitrate_values[framesize][0] / 2),
                 "QualityTuningLevel": "MULTI_PASS_HQ",
-                # AWS support case 172347295300480. requesting codec levels for VP9.
             }
         }
     elif codec == Codec.HEVC:
@@ -173,7 +176,6 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "Tiles": "ENABLED",
                 "MinIInterval": 0,
                 "AdaptiveQuantization": "HIGH",
-                # AWS support case 172347295300480. requesting clarification for why 2160 AUTO triggers 6.1 specifically in the output
                 "CodecLevel": "AUTO" if framesize < 2160 else "LEVEL_5",
                 "SceneChangeDetect": "ENABLED",
                 "QualityTuningLevel": "MULTI_PASS_HQ",
@@ -330,15 +332,6 @@ for job in jobs_to_generate:
     print(f"'------------------\nGenerating job for", job["job_name"])
     print("codec\t\ttarget bitrate\tmax bitrate")
 
-    S3_VIDEO_FILE_URI = "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.mp4"
-    S3_CAPTION_FILE_URI = (
-        "https://s3.amazonaws.com/pbs.moc-ingest/Hemingway_UHD_2398.scc"
-    )
-    # S3_VIDEO_FILE_URI = (
-    #     "https://s3.amazonaws.com/pbs.cove.videos.tp.prod/e2e_tests/pbs.mp4"
-    # )
-    # S3_CAPTION_FILE_URI = "https://s3.amazonaws.com/pbs.cove.videos.tp.prod/captions/nova/e986b865-66cd-4959-94fe-dea90dd4eda0/captions/2000195662_Original.scc"
-
     CODECS = [Codec[codec] for codec in job["codecs_to_use"]]
 
     video_outputs = generate_video_outputs(
@@ -395,7 +388,7 @@ for job in jobs_to_generate:
     }
 
     job_details = {
-        "Queue": "arn:aws:mediaconvert:us-east-1:676581116332:queues/Accelerated",
+        "Queue": MEDIACONVERT_QUEUE_ARN,
         "UserMetadata": {},
         "Role": MEDIACONVERT_ROLE_ARN,
         "Settings": {
@@ -491,11 +484,3 @@ for job in jobs_to_generate:
     # report to the user the resulting target and max bitrates for each codec
     report_bitrate_ladder(video_outputs)
     print("------------------")
-
-
-# https://static.drm.pbs.org/4k/Tst4k_AVC_1/pbs.m3u8
-# https://static.drm.pbs.org/4k/Tst4k_AVC_HEVC_1/pbs.m3u8
-# https://static.drm.pbs.org/4k/Tst4k_AVC_VP9_1/pbs.m3u8
-# https://static.drm.pbs.org/4k/Tst4k_AVC_HEVC_VP9_1/pbs.m3u8
-# https://static.drm.pbs.org/4k/Tst4k_AVC_VP9_AV1_1/pbs.m3u8
-# https://static.drm.pbs.org/4k/Tst4k_AVC_AV1_1/pbs.m3u8
