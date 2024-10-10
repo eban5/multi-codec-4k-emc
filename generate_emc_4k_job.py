@@ -357,7 +357,7 @@ for job in jobs_to_generate:
                         "Specification": "MPEG4",
                     },
                 },
-                "LanguageCodeControl": "FOLLOW_INPUT",
+                "LanguageCodeControl": "USE_CONFIGURED",
                 "AudioType": 0,
                 "LanguageCode": "ENG",
                 "StreamName": "English",
@@ -427,13 +427,13 @@ for job in jobs_to_generate:
             "FollowSource": 1,
             "Inputs": [
                 {
-                    "InputClippings": [
-                        # ! DEBUG ONLY only use a small clip to speed up testing
-                        {
-                            "EndTimecode": "00:32:50:00",
-                            "StartTimecode": "00:28:50:00",
-                        }
-                    ],
+                    # "InputClippings": [
+                    #     # ! DEBUG ONLY only use a small clip to speed up testing
+                    #     {
+                    #         "EndTimecode": "00:32:50:00",
+                    #         "StartTimecode": "00:28:50:00",
+                    #     }
+                    # ],
                     "AudioSelectors": {
                         "Audio Selector 1": {
                             "DefaultSelection": "DEFAULT",
