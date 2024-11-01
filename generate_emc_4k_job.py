@@ -449,7 +449,11 @@ for job in jobs_to_generate:
                             "SourceSettings": {
                                 "SourceType": "SCC",
                                 "FileSourceSettings": {
-                                    "SourceFile": S3_CAPTION_FILE_URI
+                                    "SourceFile": S3_CAPTION_FILE_URI,
+                                    # production files from the MOC have an additional 1 hour offset added to the timecode
+                                    # we need to specify the delta of -1 hour (in seconds) to correct this
+                                    "TimeDelta": -3600,
+                                    "TimeDeltaUnits": "SECONDS",
                                 },
                             }
                         }
