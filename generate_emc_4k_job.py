@@ -85,8 +85,8 @@ def calculate_vp9_max_bitrate(target_bitrate: int) -> int:
 
 # framesize: (bitrate, max_bitrate)
 vbr_bitrate_values = {
-    2160: (8000000, 14000000),
-    1440: (6000000, 9000000),
+    2160: (9000000, 15000000),
+    1440: (7500000, 11000000),
     1080: (4000000, 7500000),
     960: (5000000, 7000000),
     720: (2500000, 4500000),
@@ -348,9 +348,9 @@ for job in jobs_to_generate:
                     "Codec": "AAC",
                     "AacSettings": {
                         "AudioDescriptionBroadcasterMix": "NORMAL",
-                        "Bitrate": 128000,
+                        "Bitrate": 192000,
                         "RateControlMode": "CBR",
-                        "CodecProfile": "HEV1",
+                        "CodecProfile": "LC",
                         "CodingMode": "CODING_MODE_2_0",
                         "RawFormat": "NONE",
                         "SampleRate": 48000,
@@ -368,7 +368,7 @@ for job in jobs_to_generate:
             }
         ],
         "ContainerSettings": {"Container": "CMFC"},
-        "NameModifier": "-aac-128k",
+        "NameModifier": "-aac-192k",
     }
 
     captions_output = {
@@ -452,8 +452,8 @@ for job in jobs_to_generate:
                                     "SourceFile": S3_CAPTION_FILE_URI,
                                     # production files from the MOC have an additional 1 hour offset added to the timecode
                                     # we need to specify the delta of -1 hour (in seconds) to correct this
-                                    "TimeDelta": -3600,
-                                    "TimeDeltaUnits": "SECONDS",
+                                    # "TimeDelta": -3603,
+                                    # "TimeDeltaUnits": "SECONDS",
                                 },
                             }
                         }
