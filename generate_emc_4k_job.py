@@ -447,7 +447,8 @@ for job in jobs_to_generate:
                     "CaptionSelectors": {
                         "Captions Selector 1": {
                             "SourceSettings": {
-                                "SourceType": "SCC",
+                                # "SourceType": "SCC",
+                                "SourceType": "WEBVTT",
                                 "FileSourceSettings": {
                                     "SourceFile": S3_CAPTION_FILE_URI,
                                     # production files from the MOC have an additional 1 hour offset added to the timecode
