@@ -33,7 +33,8 @@ FRAMESIZES = [
 
 jobs_to_generate = [
     {
-        "job_name": "Tst4k_{codecs}_{formatted_datetime}",
+        # ! temp filename hack to support playback on Chromecast
+        "job_name": "Tst4k_AABR-AVC_{codecs}_{formatted_datetime}",
         "codecs_to_use": ["HEVC", "AVC"],
     },
     # {
@@ -256,7 +257,10 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
 
             video_outputs.append(
                 {
-                    "ContainerSettings": {"Container": "CMFC"},
+                    "ContainerSettings": {
+                        "Container": "CMFC",
+                        "CmfcSettings": {"IFrameOnlyManifest": "INCLUDE"},
+                    },
                     "VideoDescription": {
                         "Width": framewidth,
                         "ScalingBehavior": "DEFAULT",
