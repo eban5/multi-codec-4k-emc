@@ -13,34 +13,29 @@ S3_DESTINATION_PATH = config["S3_DESTINATION_PATH"]
 S3_VIDEO_FILE_URI = config["S3_VIDEO_FILE_URI"]
 S3_CAPTION_FILE_URI = config["S3_CAPTION_FILE_URI"]
 
-# ASCENDING_LADDER = False
+HEVC_PACKAGING_TYPE = "HVC1"
+# HEVC_PACKAGING_TYPE = "HEV1"
 
 # The list of framesizes to produce outputs for, ordered by preference
 FRAMESIZES = [
     720,
     234,
-    # 360,
     432,
-    # 960,
     1080,
     1440,
     2160,
 ]
 
-# if ASCENDING_LADDER:
-#     FRAMESIZES.reverse()
-
-
 jobs_to_generate = [
     {
-        # ! temp filename hack to support playback on Chromecast
-        "job_name": "Tst4k_AABR-AVC_{codecs}_{formatted_datetime}",
+        "job_name": "4k-HEVC-AVC-{formatted_datetime}",
         "codecs_to_use": ["HEVC", "AVC"],
     },
     # {
-    #     "job_name": "Tst4k_{codecs}_{formatted_datetime}",
+    #     # ! AABR-AVC must appear in the filename to support Chromecast playback
+    #     "job_name": "AABR-AVC-{formatted_datetime}",
     #     "codecs_to_use": [
-    #         "VP9",
+    #         "AVC",
     #     ],
     # },
 ]
@@ -133,26 +128,21 @@ def generate_image_insertion(codec: Codec, framesize):
     }
 
 
-def generate_codec_settings_block(codec: Codec, framesize):
+def calculate_qvbr_quality_level(framesize):
     if framesize < 720:
-        qvbr_quality_level = 4
+        return 4
     elif framesize >= 720 and framesize <= 1080:
-        qvbr_quality_level = 7
+        return 7
     elif framesize > 1080:
-        qvbr_quality_level = 9
+        return 9
+
+
+def generate_codec_settings_block(codec: Codec, framesize):
 
     max_bitrate = vbr_bitrate_values[framesize][1]
+    qvbr_quality_level = calculate_qvbr_quality_level(framesize)
 
-    if codec == Codec.VP9:
-        return {
-            "Vp9Settings": {
-                "RateControlMode": "VBR",
-                "MaxBitrate": math.floor(vbr_bitrate_values[framesize][1] / 2),
-                "Bitrate": math.floor(vbr_bitrate_values[framesize][0] / 2),
-                "QualityTuningLevel": "MULTI_PASS_HQ",
-            }
-        }
-    elif codec == Codec.HEVC:
+    if codec == Codec.HEVC:
         max_bitrate_hevc = math.floor(max_bitrate / 2)
         return {
             "H265Settings": {
@@ -185,14 +175,13 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "NumberBFramesBetweenReferenceFrames": 3,
                 "TemporalIds": "DISABLED",
                 "SampleAdaptiveOffsetFilterMode": "ADAPTIVE",
-                "WriteMp4PackagingType": "HVC1",
+                "WriteMp4PackagingType": HEVC_PACKAGING_TYPE,
                 "DynamicSubGop": "ADAPTIVE",
             }
         }
 
     elif codec == Codec.AVC:
         avc_codec_profile = "MAIN" if framesize < 1080 else "HIGH"
-
         return {
             "H264Settings": {
                 "InterlaceMode": "PROGRESSIVE",
@@ -242,6 +231,15 @@ def generate_codec_settings_block(codec: Codec, framesize):
                 "SpatialAdaptiveQuantization": "ENABLED",
             }
         }
+    elif codec == Codec.VP9:
+        return {
+            "Vp9Settings": {
+                "RateControlMode": "VBR",
+                "MaxBitrate": math.floor(vbr_bitrate_values[framesize][1] / 2),
+                "Bitrate": math.floor(vbr_bitrate_values[framesize][0] / 2),
+                "QualityTuningLevel": "MULTI_PASS_HQ",
+            }
+        }
 
 
 def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
@@ -259,7 +257,10 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
                 {
                     "ContainerSettings": {
                         "Container": "CMFC",
-                        "CmfcSettings": {"IFrameOnlyManifest": "INCLUDE"},
+                        "CmfcSettings": {
+                            "IFrameOnlyManifest": "INCLUDE",
+                            "AudioRenditionSets": "audio_aac",
+                        },
                     },
                     "VideoDescription": {
                         "Width": framewidth,
@@ -280,7 +281,7 @@ def generate_video_outputs(codecs: list[Codec], framesizes=FRAMESIZES):
                         "RespondToAfd": "NONE",
                         "ColorMetadata": "INSERT",
                     },
-                    "NameModifier": f"-{Codec(codec).value.lower()}-{framesize}",
+                    "NameModifier": f"-{Codec(codec).value}-{framesize}p",
                 }
             )
 
@@ -317,7 +318,7 @@ def report_bitrate_ladder(video_outputs: list[dict]):
 def generate_job_name(name: str, codecs: list[str]):
     # Get the current datetime and format it as yyyyMMdd_HHmmSS
     current_datetime = datetime.now()
-    formatted_datetime = current_datetime.strftime("%Y%m%d_%H%M%S")
+    formatted_datetime = current_datetime.strftime("%Y%m%d-%H%M%S")
 
     # Update the job_name field dynamically
     # Concatenate the codecs into a single string separated by an underscore
@@ -371,7 +372,10 @@ for job in jobs_to_generate:
                 },
             }
         ],
-        "ContainerSettings": {"Container": "CMFC"},
+        "ContainerSettings": {
+            "Container": "CMFC",
+            "CmfcSettings": {"AudioGroupId": "audio_aac"},
+        },
         "NameModifier": "-aac-192k",
     }
 
@@ -383,7 +387,7 @@ for job in jobs_to_generate:
                 "CaptionSelectorName": "Captions Selector 1",
                 "DestinationSettings": {
                     "DestinationType": "WEBVTT",
-                    "WebvttDestinationSettings": {},
+                    "WebvttDestinationSettings": {"Accessibility": "ENABLED"},
                 },
                 "LanguageCode": "ENG",
                 "LanguageDescription": "English",
@@ -423,7 +427,7 @@ for job in jobs_to_generate:
                                 }
                             },
                             "FragmentLength": 2,
-                            "CodecSpecification": "RFC_6381",  # default: "RFC_4281"
+                            "CodecSpecification": "RFC_6381",
                         },
                     },
                 },
@@ -451,14 +455,14 @@ for job in jobs_to_generate:
                     "CaptionSelectors": {
                         "Captions Selector 1": {
                             "SourceSettings": {
-                                # "SourceType": "SCC",
-                                "SourceType": "WEBVTT",
+                                "SourceType": "SCC",
+                                # "SourceType": "WEBVTT",
                                 "FileSourceSettings": {
                                     "SourceFile": S3_CAPTION_FILE_URI,
                                     # production files from the MOC have an additional 1 hour offset added to the timecode
                                     # we need to specify the delta of -1 hour (in seconds) to correct this
-                                    # "TimeDelta": -3603,
-                                    # "TimeDeltaUnits": "SECONDS",
+                                    "TimeDelta": -3603,
+                                    "TimeDeltaUnits": "SECONDS",
                                 },
                             }
                         }
