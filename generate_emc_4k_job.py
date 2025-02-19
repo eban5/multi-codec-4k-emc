@@ -444,19 +444,19 @@ for job in jobs_to_generate:
                         "Captions Selector 1": {
                             "SourceSettings": {
                                 # Leonardo Trailer has SCC captions and requires offset
-                                "SourceType": "SCC",
-                                "FileSourceSettings": {
-                                    "SourceFile": S3_CAPTION_FILE_URI,
-                                    # production files from the MOC have an additional 1 hour offset added to the timecode
-                                    # we need to specify the delta of -1 hour (in seconds) to correct this
-                                    "TimeDelta": -3603,
-                                    "TimeDeltaUnits": "SECONDS",
-                                },
-                                # Sharks episode has WebVTT captions
-                                # "SourceType": "WEBVTT",
+                                # "SourceType": "SCC",
                                 # "FileSourceSettings": {
                                 #     "SourceFile": S3_CAPTION_FILE_URI,
+                                #     # production files from the MOC have an additional 1 hour offset added to the timecode
+                                #     # we need to specify the delta of -1 hour (in seconds) to correct this
+                                #     "TimeDelta": -3603,
+                                #     "TimeDeltaUnits": "SECONDS",
                                 # },
+                                # Sharks episode has WebVTT captions
+                                "SourceType": "WEBVTT",
+                                "FileSourceSettings": {
+                                    "SourceFile": S3_CAPTION_FILE_URI,
+                                },
                             }
                         }
                     },
