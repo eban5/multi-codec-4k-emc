@@ -16,6 +16,22 @@ S3_CAPTION_FILE_URI = config["S3_CAPTION_FILE_URI"]
 HEVC_PACKAGING_TYPE = "HVC1"
 # HEVC_PACKAGING_TYPE = "HEV1"
 
+
+class Codec(Enum):
+    VP9 = "VP9"
+    HEVC = "HEVC"
+    AVC = "AVC"
+    AV1 = "AV1"
+
+
+# Formatted for the MediaConvert "Codec" field
+class CodecAwsName(Enum):
+    VP9 = "VP9"
+    HEVC = "H_265"
+    AVC = "H_264"
+    AV1 = "AV1"
+
+
 # The list of framesizes to produce outputs for, ordered by preference
 FRAMESIZES = [
     720,
@@ -41,7 +57,6 @@ jobs_to_generate = [
 ]
 
 
-# an AI wrote this, and it seems correct to me. blame the machine.
 def bps_to_human_readable(bps):
     if bps >= 1_000_000:
         # Convert to Megabits per second
@@ -53,30 +68,7 @@ def bps_to_human_readable(bps):
         unit = "Kbps"
 
     # Format the result as a string with the appropriate suffix
-    readable_str = f"{value:.2f} {unit}"
-
-    return readable_str
-
-
-class Codec(Enum):
-    VP9 = "VP9"
-    HEVC = "HEVC"
-    AVC = "AVC"
-    AV1 = "AV1"
-
-
-# The name MediaConvert uses as the "Codec:" field
-class CodecAwsName(Enum):
-    VP9 = "VP9"
-    HEVC = "H_265"
-    AVC = "H_264"
-    AV1 = "AV1"
-
-
-def calculate_vp9_max_bitrate(target_bitrate: int) -> int:
-
-    # https://developers.google.com/media/vp9/settings/vod
-    return math.floor(target_bitrate * 1.45)
+    return f"{value:.2f} {unit}"
 
 
 # framesize: (bitrate, max_bitrate)
@@ -92,6 +84,11 @@ vbr_bitrate_values = {
 }
 
 
+def calculate_vp9_max_bitrate(target_bitrate: int) -> int:
+    # https://developers.google.com/media/vp9/settings/vod
+    return math.floor(target_bitrate * 1.45)
+
+
 vp9_bitrate_values = {
     2160: (5000000, calculate_vp9_max_bitrate(5000000)),
     1440: (4096000, calculate_vp9_max_bitrate(4096000)),
@@ -104,14 +101,8 @@ vp9_bitrate_values = {
 }
 
 
-def create_s3_output_path(job_name: str):
-    if not job_name:
-        output_dir = "multicodec10"
-    else:
-        output_dir = job_name
-    return f"s3://{S3_DESTINATION_PATH}{output_dir}/$fn$"
-
-
+# adds the framesize/codec badge in the top right corner of each video segment
+# a new set can be generated with "generate_framesize_badges.py"
 def generate_image_insertion(codec: Codec, framesize):
     return {
         "ImageInserter": {
@@ -138,7 +129,6 @@ def calculate_qvbr_quality_level(framesize):
 
 
 def generate_codec_settings_block(codec: Codec, framesize):
-
     max_bitrate = vbr_bitrate_values[framesize][1]
     qvbr_quality_level = calculate_qvbr_quality_level(framesize)
 
@@ -416,9 +406,7 @@ for job in jobs_to_generate:
                             "SegmentControl": "SEGMENTED_FILES",
                             "ManifestDurationFormat": "FLOATING_POINT",
                             "StreamInfResolution": "INCLUDE",
-                            "Destination": create_s3_output_path(
-                                job_name=job["job_name"]
-                            ),
+                            "Destination": f"s3://{S3_DESTINATION_PATH}{job['job_name']}/$fn$",
                             "DestinationSettings": {
                                 "S3Settings": {
                                     "AccessControl": {
@@ -455,8 +443,8 @@ for job in jobs_to_generate:
                     "CaptionSelectors": {
                         "Captions Selector 1": {
                             "SourceSettings": {
+                                # Leonardo Trailer has SCC captions and requires offset
                                 "SourceType": "SCC",
-                                # "SourceType": "WEBVTT",
                                 "FileSourceSettings": {
                                     "SourceFile": S3_CAPTION_FILE_URI,
                                     # production files from the MOC have an additional 1 hour offset added to the timecode
@@ -464,6 +452,11 @@ for job in jobs_to_generate:
                                     "TimeDelta": -3603,
                                     "TimeDeltaUnits": "SECONDS",
                                 },
+                                # Sharks episode has WebVTT captions
+                                # "SourceType": "WEBVTT",
+                                # "FileSourceSettings": {
+                                #     "SourceFile": S3_CAPTION_FILE_URI,
+                                # },
                             }
                         }
                     },
@@ -477,7 +470,7 @@ for job in jobs_to_generate:
         "Priority": 0,
     }
 
-    # write the json dump to the static directory
+    # write the json dump to the static directory -- this is the file that gets uploaded to MediaConvert
     with open(f"static/{job['job_name']}.json", "w") as f:
         f.write(json.dumps(job_details, indent=2))
 
